@@ -1,4 +1,4 @@
-package main.java.it.unibo.exam.controller.input;
+package it.unibo.exam.controller.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

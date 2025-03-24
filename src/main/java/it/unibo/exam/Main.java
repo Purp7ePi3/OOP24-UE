@@ -1,4 +1,4 @@
-package main.java.it.unibo.exam;
+package it.unibo.exam;
 
 import javax.swing.JFrame;
 import main.java.it.unibo.exam.controller.game.GameController;

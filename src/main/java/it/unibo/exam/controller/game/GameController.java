@@ -1,7 +1,7 @@
-package main.java.it.unibo.exam.controller.game;
+package it.unibo.exam.controller.game;
 
-import main.java.it.unibo.exam.controller.input.KeyHandler;
-import main.java.it.unibo.exam.model.entity.Door;
+import it.unibo.exam.controller.input.KeyHandler;
+import it.unibo.exam.model.entity.Door;
 import main.java.it.unibo.exam.model.entity.Player;
 import main.java.it.unibo.exam.model.game.GameState;
 import main.java.it.unibo.exam.model.room.PuzzleRoom;
