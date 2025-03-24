@@ -1,4 +1,4 @@
-package main.java.it.unibo.exam.view.panel;
+package it.unibo.exam.view.panel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,7 +34,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setPreferredSize(new Dimension(ORIGINAL_WIDTH, ORIGINAL_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
-        //this.addKeyListener(gameController.getGameState().getKeyHandler());
+        
+        // Fix this line to properly add the KeyHandler
+        this.addKeyListener(gameController.getKeyHandler());
         this.setFocusable(true);
     }
     

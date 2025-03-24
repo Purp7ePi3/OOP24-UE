@@ -6,6 +6,19 @@ import main.java.it.unibo.exam.view.panel.GamePanel;
 public class Player extends Entity {
     private int speed;
     
+    // Animation and direction properties
+    public static final int UP = 0;
+    public static final int DOWN = 1;
+    public static final int LEFT = 2;
+    public static final int RIGHT = 3;
+    
+    private int direction = DOWN; // Default direction
+    private boolean moving = false;
+    
+    // Animation variables
+    private int spriteCounter = 0;
+    private int spriteNum = 0;
+    
     public Player(int x, int y, int speed) {
         this.x = x;
         this.y = y;
@@ -19,11 +32,32 @@ public class Player extends Entity {
         int currentSpeedX = 0;
         int currentSpeedY = 0;
         
-        if (down) currentSpeedY = speed;
-        if (up) currentSpeedY = -speed;
-        if (left) currentSpeedX = -speed;
-        if (right) currentSpeedX = speed;
+        // Reset moving flag
+        moving = false;
         
+        // Update direction based on key input
+        if (up) {
+            currentSpeedY = -speed;
+            direction = UP;
+            moving = true;
+        }
+        if (down) {
+            currentSpeedY = speed;
+            direction = DOWN;
+            moving = true;
+        }
+        if (left) {
+            currentSpeedX = -speed;
+            direction = LEFT;
+            moving = true;
+        }
+        if (right) {
+            currentSpeedX = speed;
+            direction = RIGHT;
+            moving = true;
+        }
+        
+        // Update position
         x += currentSpeedX * deltaTime * speed;
         y += currentSpeedY * deltaTime * speed;
         
@@ -34,9 +68,30 @@ public class Player extends Entity {
         if (y > GamePanel.ORIGINAL_HEIGHT - height) y = GamePanel.ORIGINAL_HEIGHT - height;
         
         updateHitbox();
+        
+        // Update animation
+        if (moving) {
+            spriteCounter += deltaTime * 10;
+            if (spriteCounter > 1) {
+                spriteNum = (spriteNum + 1) % 4; // Cycle through 4 frames
+                spriteCounter = 0;
+            }
+        }
     }
     
     public int getSpeed() {
         return speed;
+    }
+    
+    public int getDirection() {
+        return direction;
+    }
+    
+    public boolean isMoving() {
+        return moving;
+    }
+    
+    public int getSpriteNum() {
+        return spriteNum;
     }
 }

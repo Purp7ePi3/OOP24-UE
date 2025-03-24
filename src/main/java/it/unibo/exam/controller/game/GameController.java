@@ -1,13 +1,12 @@
-package it.unibo.exam.controller.game;
+package main.java.it.unibo.exam.controller.game;
 
-import it.unibo.exam.controller.input.KeyHandler;
-import it.unibo.exam.model.entity.Door;
+import main.java.it.unibo.exam.controller.input.KeyHandler;
+import main.java.it.unibo.exam.model.entity.Door;
 import main.java.it.unibo.exam.model.entity.Player;
 import main.java.it.unibo.exam.model.game.GameState;
 import main.java.it.unibo.exam.model.room.PuzzleRoom;
 import main.java.it.unibo.exam.model.room.Room;
 import main.java.it.unibo.exam.view.panel.GamePanel;
-
 public class GameController {
     private GameState gameState;
     private KeyHandler keyHandler;
@@ -93,4 +92,9 @@ public class GameController {
     public void resetFrameCount() {
         this.frameCount = 0;
     }
+
+    public KeyHandler getKeyHandler() {
+        return keyHandler;
+    }
+    
 }

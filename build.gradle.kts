@@ -15,7 +15,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("main.java.it.unibo.exam.Main")
+    mainClass.set("it.unibo.exam.Main")
 }
 
 tasks.withType<JavaCompile> {

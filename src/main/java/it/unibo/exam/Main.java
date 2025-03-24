@@ -1,11 +1,13 @@
-package it.unibo.exam;
+package main.java.it.unibo.exam;
 
 import javax.swing.JFrame;
 import main.java.it.unibo.exam.controller.game.GameController;
 import main.java.it.unibo.exam.controller.input.KeyHandler;
 import main.java.it.unibo.exam.model.game.GameState;
 import main.java.it.unibo.exam.view.panel.GamePanel;
+import main.java.it.unibo.exam.model.game.GameState;
 
+@SuppressWarnings("unused")
 public final class Main {
     private Main() {
         throw new UnsupportedOperationException("Main class cannot be instantiated");
