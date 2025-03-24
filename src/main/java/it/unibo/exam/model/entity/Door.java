@@ -1,7 +1,7 @@
-package main.java.it.unibo.exam.model.entity;
+package it.unibo.exam.model.entity;
 
 import java.awt.Rectangle;
-import main.java.it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.view.panel.GamePanel;
 
 public class Door extends Entity {
     private String name;

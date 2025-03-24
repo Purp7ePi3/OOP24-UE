@@ -1,6 +1,6 @@
-package main.java.it.unibo.exam.model.room;
+package it.unibo.exam.model.room;
 
-import main.java.it.unibo.exam.controller.input.KeyHandler;
+import it.unibo.exam.controller.input.KeyHandler;
 import java.awt.Graphics2D;
 
 public interface PuzzleRoom {

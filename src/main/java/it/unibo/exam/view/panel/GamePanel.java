@@ -6,13 +6,14 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
-import main.java.it.unibo.exam.controller.game.GameController;
-import main.java.it.unibo.exam.model.entity.Player;
-import main.java.it.unibo.exam.model.game.GameState;
-import main.java.it.unibo.exam.model.room.PuzzleRoom;
-import main.java.it.unibo.exam.model.room.Room;
-import main.java.it.unibo.exam.view.renderer.EntityRenderer;
-import main.java.it.unibo.exam.view.renderer.RoomRenderer;
+import it.unibo.exam.controller.game.GameController;
+import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
+import it.unibo.exam.model.entity.Player;
+import it.unibo.exam.model.game.GameState;
+import it.unibo.exam.model.room.PuzzleRoom;
+import it.unibo.exam.model.room.Room;
+import it.unibo.exam.view.renderer.EntityRenderer;
+import it.unibo.exam.view.renderer.RoomRenderer;
 
 public class GamePanel extends JPanel implements Runnable {
     public static final int ORIGINAL_WIDTH = 800;
@@ -23,19 +24,19 @@ public class GamePanel extends JPanel implements Runnable {
     
     private Thread gameThread;
     private GameController gameController;
+    private PuzzleController puzzleController; // Add this field
     private RoomRenderer roomRenderer;
     private EntityRenderer entityRenderer;
     
-    public GamePanel(GameController gameController) {
+    public GamePanel(GameController gameController, PuzzleController puzzleController) { // Update constructor
         this.gameController = gameController;
+        this.puzzleController = puzzleController; // Initialize
         this.roomRenderer = new RoomRenderer();
         this.entityRenderer = new EntityRenderer();
         
         this.setPreferredSize(new Dimension(ORIGINAL_WIDTH, ORIGINAL_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
-        
-        // Fix this line to properly add the KeyHandler
         this.addKeyListener(gameController.getKeyHandler());
         this.setFocusable(true);
     }
@@ -52,17 +53,17 @@ public class GamePanel extends JPanel implements Runnable {
         final int FPS = 60;
         final long frameTime = 1_000_000_000 / FPS;
         long lastTime = System.nanoTime();
-        long currentTime;
         double deltaTime;
         
         gameController.setLastFpsTime(System.currentTimeMillis());
         gameController.resetFrameCount();
         
         while (gameThread != null) {
-            currentTime = System.nanoTime();
+            long currentTime = System.nanoTime();
             deltaTime = (currentTime - lastTime) / 1_000_000_000.0;
             
             gameController.update(deltaTime);
+            puzzleController.update(deltaTime); // Add this to update puzzle logic
             gameController.updateFPS();
             repaint();
             
@@ -74,7 +75,6 @@ public class GamePanel extends JPanel implements Runnable {
                     Thread.currentThread().interrupt();
                 }
             }
-            
             lastTime = currentTime;
         }
     }
@@ -88,17 +88,13 @@ public class GamePanel extends JPanel implements Runnable {
         Room currentRoom = gameState.getCurrentRoom();
         Player player = gameState.getPlayer();
         
-        // Render room
         if (currentRoom instanceof PuzzleRoom) {
             ((PuzzleRoom) currentRoom).draw(g2);
         } else {
             roomRenderer.render(g2, currentRoom);
         }
         
-        // Render player
         entityRenderer.renderPlayer(g2, player);
-        
-        // Render UI
         drawUI(g2, gameState);
         
         g2.dispose();

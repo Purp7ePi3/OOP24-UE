@@ -1,12 +1,12 @@
-package main.java.it.unibo.exam.model.room;
+package it.unibo.exam.model.room;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.List;
-import main.java.it.unibo.exam.controller.input.KeyHandler;
-import main.java.it.unibo.exam.model.entity.Door;
-import main.java.it.unibo.exam.model.game.GameState;
-import main.java.it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.controller.input.KeyHandler;
+import it.unibo.exam.model.entity.Door;
+import it.unibo.exam.model.game.GameState;
+import it.unibo.exam.view.panel.GamePanel;
 
 public class PuzzleRoom1 extends Room implements PuzzleRoom {
     private boolean puzzleSolved = false;

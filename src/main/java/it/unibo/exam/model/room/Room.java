@@ -1,8 +1,8 @@
-package main.java.it.unibo.exam.model.room;
+package it.unibo.exam.model.room;
 
 import java.awt.Color;
 import java.util.List;
-import main.java.it.unibo.exam.model.entity.Door;
+import it.unibo.exam.model.entity.Door;
 
 public class Room {
     private Color backgroundColor;

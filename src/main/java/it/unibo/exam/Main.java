@@ -1,31 +1,29 @@
-package main.java.it.unibo.exam;
+package it.unibo.exam;
 
 import javax.swing.JFrame;
-import main.java.it.unibo.exam.controller.game.GameController;
-import main.java.it.unibo.exam.controller.input.KeyHandler;
-import main.java.it.unibo.exam.model.game.GameState;
-import main.java.it.unibo.exam.view.panel.GamePanel;
-import main.java.it.unibo.exam.model.game.GameState;
+import it.unibo.exam.controller.game.GameController;
+import it.unibo.exam.controller.input.KeyHandler;
+import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
+import it.unibo.exam.model.game.GameState;
+import it.unibo.exam.view.panel.GamePanel;
 
-@SuppressWarnings("unused")
 public final class Main {
     private Main() {
         throw new UnsupportedOperationException("Main class cannot be instantiated");
     }
     
     public static void main(final String[] args) {
-        // Initialize components
         KeyHandler keyHandler = new KeyHandler();
         GameState gameState = new GameState();
         GameController gameController = new GameController(gameState, keyHandler);
+        PuzzleController puzzleController = new PuzzleController(gameState, keyHandler); // Add this
         
-        // Set up UI
         final JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("UNIBO");
         
-        final GamePanel gamePanel = new GamePanel(gameController);
+        final GamePanel gamePanel = new GamePanel(gameController, puzzleController); // Update to pass PuzzleController
         window.add(gamePanel);
         window.pack();
         window.setLocationRelativeTo(null);
@@ -33,12 +31,3 @@ public final class Main {
         gamePanel.startGameThread();
     }
 }
-
-/***
- * @Copyright
- *            Simone Brunelli - Purp7ePi3 - simone.brunelli3@studio.unibo.it
- *            Tommaso Nori - tommaso.nori@studio.unibo.it
- *            Daniel Horna - d.alejandrohorna@gmail.com
- *            Davide Amantini - AmantiniDavide - davide.amantini@studio.unibo.it
- *            Mattia Pozzati - PozzatiMattia - mattia.pozzati3@studio.unibo.it
- */

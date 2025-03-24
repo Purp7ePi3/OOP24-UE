@@ -1,7 +1,7 @@
-package main.java.it.unibo.exam.model.entity;
+package it.unibo.exam.model.entity;
 
 import java.awt.Rectangle;
-import main.java.it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.view.panel.GamePanel;
 
 public class Player extends Entity {
     private int speed;
@@ -93,5 +93,21 @@ public class Player extends Entity {
     
     public int getSpriteNum() {
         return spriteNum;
+    }
+    
+    private void updateHitbox() {
+        hitbox.x = x;
+        hitbox.y = y;
+    }
+    
+    // Added setters needed by GameController
+    public void setX(int x) {
+        this.x = x;
+        updateHitbox();
+    }
+    
+    public void setY(int y) {
+        this.y = y;
+        updateHitbox();
     }
 }
