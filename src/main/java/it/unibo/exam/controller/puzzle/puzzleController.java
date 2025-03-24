@@ -1,10 +1,12 @@
 package it.unibo.exam.controller.puzzle;
 
-import main.java.it.unibo.exam.controller.input.KeyHandler;
-import main.java.it.unibo.exam.model.entity.Player;
-import main.java.it.unibo.exam.model.game.GameState;
-import main.java.it.unibo.exam.model.room.PuzzleRoom;
+import it.unibo.exam.controller.input.KeyHandler;
+import it.unibo.exam.model.entity.Player;
+import it.unibo.exam.model.game.GameState;
+import it.unibo.exam.model.room.PuzzleRoom;
+import it.unibo.exam.model.room.Room;
 
+@SuppressWarnings("unused")
 public class PuzzleController {
     private final GameState gameState;
     private final KeyHandler keyHandler;
@@ -13,7 +15,7 @@ public class PuzzleController {
         this.gameState = gameState;
         this.keyHandler = keyHandler;
     }
-
+    
     public void update(double deltaTime) {
         // Only update if current room is a PuzzleRoom
         if (gameState.getCurrentRoom() instanceof PuzzleRoom) {

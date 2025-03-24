@@ -3,11 +3,12 @@ package it.unibo.exam.model.game;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import main.java.it.unibo.exam.model.entity.Door;
-import main.java.it.unibo.exam.model.entity.Player;
-import main.java.it.unibo.exam.model.room.Room;
-import main.java.it.unibo.exam.model.room.PuzzleRoom1;
-import main.java.it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.model.entity.Door;
+import it.unibo.exam.model.entity.Player;
+import it.unibo.exam.model.room.Room;
+import it.unibo.exam.model.room.PuzzleRoom1;
+import it.unibo.exam.model.room.PuzzleRoom2;
+import it.unibo.exam.view.panel.GamePanel;
 
 public class GameState {
     private List<Room> rooms;
@@ -32,13 +33,15 @@ public class GameState {
             new Door(0, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Gabinetto", 2, false),
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Stanza 3", 3, false),
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Stanza 4", 4, false),
-            new Door(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Stanza 5", 5, false));
+            new Door(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Giarino", 5, false));
         rooms.add(new Room(Color.BLUE, room1Doors));
         
         rooms.add(new PuzzleRoom1(List.of(
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
+        rooms.add(new PuzzleRoom2(List.of(
+            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
     }
-    
+
     public Room getCurrentRoom() {
         return rooms.get(currentRoomIndex);
     }

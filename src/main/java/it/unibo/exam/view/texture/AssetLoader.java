@@ -3,6 +3,7 @@ package it.unibo.exam.view.texture;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.Color;
 
 public class AssetLoader {
     // Singleton pattern
@@ -42,27 +43,53 @@ public class AssetLoader {
             playerWalkRight = new BufferedImage[4];
             
             // Load player idle textures
-            playerIdleDown = ImageIO.read(getClass().getResourceAsStream("/player/player_idle_down.png"));
-            playerIdleUp = ImageIO.read(getClass().getResourceAsStream("/player/player_idle_up.png"));
-            playerIdleLeft = ImageIO.read(getClass().getResourceAsStream("/player/player_idle_left.png"));
-            playerIdleRight = ImageIO.read(getClass().getResourceAsStream("/player/player_idle_right.png"));
+            playerIdleDown = loadImage("/player/player_idle_down.png");
+            playerIdleUp = loadImage("/player/player_idle_up.png");
+            playerIdleLeft = loadImage("/player/player_idle_left.png");
+            playerIdleRight = loadImage("/player/player_idle_right.png");
             
             // Load player walking animations
             for (int i = 0; i < 4; i++) {
-                playerWalkDown[i] = ImageIO.read(getClass().getResourceAsStream("/player/player_walk_down_" + i + ".png"));
-                playerWalkUp[i] = ImageIO.read(getClass().getResourceAsStream("/player/player_walk_up_" + i + ".png"));
-                playerWalkLeft[i] = ImageIO.read(getClass().getResourceAsStream("/player/player_walk_left_" + i + ".png"));
-                playerWalkRight[i] = ImageIO.read(getClass().getResourceAsStream("/player/player_walk_right_" + i + ".png"));
+                playerWalkDown[i] = loadImage("/player/player_walk_down_" + i + ".png");
+                playerWalkUp[i] = loadImage("/player/player_walk_up_" + i + ".png");
+                playerWalkLeft[i] = loadImage("/player/player_walk_left_" + i + ".png");
+                playerWalkRight[i] = loadImage("/player/player_walk_right_" + i + ".png");
             }
             
             assetsLoaded = true;
             System.out.println("Game assets loaded successfully!");
-        } catch (IOException | NullPointerException e) {
+        } catch (Exception e) {
             System.err.println("Error loading assets: " + e.getMessage());
             System.err.println("Using default player rendering instead of textures");
         }
     }
-    
+
+    private BufferedImage loadImage(String path) {
+        try {
+            BufferedImage img = ImageIO.read(getClass().getResourceAsStream(path));
+            if (img == null) {
+                System.err.println("Missing asset: " + path);
+                // Fallback to a default image (you can create a basic placeholder image here)
+                img = createDefaultImage();
+            }
+            return img;
+        } catch (IOException e) {
+            System.err.println("Error loading image from " + path + ": " + e.getMessage());
+            return createDefaultImage(); // Fallback to default image
+        }
+    }
+
+    private BufferedImage createDefaultImage() {
+        // You can create a simple placeholder image like a solid color rectangle
+        BufferedImage defaultImage = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+        for (int x = 0; x < 32; x++) {
+            for (int y = 0; y < 32; y++) {
+                defaultImage.setRGB(x, y, Color.GRAY.getRGB()); // Use any fallback color
+            }
+        }
+        return defaultImage;
+    }
+
     public boolean areAssetsLoaded() {
         return assetsLoaded;
     }

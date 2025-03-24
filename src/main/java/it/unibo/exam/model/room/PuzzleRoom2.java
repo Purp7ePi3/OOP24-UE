@@ -8,11 +8,11 @@ import it.unibo.exam.model.entity.Door;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.view.panel.GamePanel;
 
-public class PuzzleRoom1 extends Room implements PuzzleRoom {
+public class PuzzleRoom2 extends Room implements PuzzleRoom {
     private boolean puzzleSolved = false;
     private final GameState gameState;
     
-    public PuzzleRoom1(final List<Door> doors, final GameState gameState) {
+    public PuzzleRoom2(final List<Door> doors, final GameState gameState) {
         super(Color.GRAY, doors);
         this.gameState = gameState;
     }

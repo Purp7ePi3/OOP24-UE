@@ -4,6 +4,7 @@ import it.unibo.exam.controller.input.KeyHandler;
 import it.unibo.exam.model.entity.Door;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
+import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.GamePanel;
 
 public class GameController {
