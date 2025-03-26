@@ -7,11 +7,15 @@ import it.unibo.exam.model.room.PuzzleRoom;
 import it.unibo.exam.model.room.Room;
 
 @SuppressWarnings("unused")
-public class puzzleController {
+public class PuzzleController {
     private final GameState gameState;
     private final KeyHandler keyHandler;
+    
+    private static final String[] ROOM_NAMES = {
+        "Palestra", "Bar", "Laboratorio", "aula 2.12", "giardino"
+    };
 
-    public puzzleController(GameState gameState, KeyHandler keyHandler) {
+    public PuzzleController(GameState gameState, KeyHandler keyHandler) {
         this.gameState = gameState;
         this.keyHandler = keyHandler;
     }
@@ -42,9 +46,11 @@ public class puzzleController {
         // Update the game state based on which puzzle room was solved
         int roomIndex = gameState.getCurrentRoomIndex();
         gameState.updateDoorState(roomIndex, true);
-        gameState.setLastInteraction("Puzzle in Room " + roomIndex + " Solved!");
-
-        // Additional logic could go here (e.g., unlocking items, changing rooms)
+        String roomName = (roomIndex >= 0 && roomIndex < ROOM_NAMES.length) 
+            ? ROOM_NAMES[roomIndex - 1] 
+            : "Unknown Room";
+    
+        gameState.setLastInteraction(roomName + " solved!");
     }
 
     // Getter if needed elsewhere
