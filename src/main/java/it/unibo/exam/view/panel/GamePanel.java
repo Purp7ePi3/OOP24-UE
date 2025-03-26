@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import it.unibo.exam.controller.game.GameController;
-import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
+import it.unibo.exam.controller.puzzle.puzzleController; // Add this import
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.PuzzleRoom;
@@ -24,11 +24,11 @@ public class GamePanel extends JPanel implements Runnable {
     
     private Thread gameThread;
     private GameController gameController;
-    private PuzzleController puzzleController; // Add this field
+    private puzzleController puzzleController; // Add this field
     private RoomRenderer roomRenderer;
     private EntityRenderer entityRenderer;
     
-    public GamePanel(GameController gameController, PuzzleController puzzleController) { // Update constructor
+    public GamePanel(GameController gameController, puzzleController puzzleController) { // Update constructor
         this.gameController = gameController;
         this.puzzleController = puzzleController; // Initialize
         this.roomRenderer = new RoomRenderer();
