@@ -5,6 +5,7 @@ import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.PuzzleRoom;
 import it.unibo.exam.model.room.Room;
+import it.unibo.exam.view.panel.MainMenuPanel;
 
 @SuppressWarnings("unused")
 public class PuzzleController {

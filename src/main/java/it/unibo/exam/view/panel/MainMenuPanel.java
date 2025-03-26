@@ -24,9 +24,14 @@ public class MainMenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Quando clicchi "Gioca", rimuoviamo il menu e carichiamo il gioco
                 window.getContentPane().removeAll();
-                window.getContentPane().add(new GamePanel(gameController, puzzleController)); // Carica il GamePanel
-                window.revalidate();
-                window.repaint();
+                final GamePanel gamePanel = new GamePanel(gameController, puzzleController); // Update to pass PuzzleController
+                window.add(gamePanel);
+                gamePanel.requestFocusInWindow();
+
+                window.pack();
+                window.setLocationRelativeTo(null);
+                window.setVisible(true);
+                gamePanel.startGameThread();
             }
         });
 
