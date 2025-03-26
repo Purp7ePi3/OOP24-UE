@@ -5,11 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import it.unibo.exam.controller.game.GameController;
-import it.unibo.exam.controller.puzzle.puzzleController;
+import it.unibo.exam.controller.puzzle.PuzzleController;
 
 public class MainMenuPanel extends JPanel {
     
-    public MainMenuPanel(JFrame window, GameController gameController, puzzleController puzzleController) {
+    public MainMenuPanel(JFrame window, GameController gameController, PuzzleController puzzleController) {
         // Layout del pannello per allineare i pulsanti
         setLayout(new GridLayout(3, 1));
 
