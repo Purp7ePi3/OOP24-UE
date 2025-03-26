@@ -41,7 +41,7 @@ public class PuzzleController {
         // For now, we'll rely on the room's own state
         return false; // Simplified: assume we process each solve event once
     }
-
+    
     private void handlePuzzleSolved(PuzzleRoom room) {
         // Update the game state based on which puzzle room was solved
         int roomIndex = gameState.getCurrentRoomIndex();
