@@ -47,7 +47,7 @@ public class PuzzleController {
         // Update the game state based on which puzzle room was solved
         int roomIndex = gameState.getCurrentRoomIndex();
         gameState.updateDoorState(roomIndex, true);
-        String roomName = (roomIndex >= 0 && roomIndex < ROOM_NAMES.length) 
+        String roomName = (roomIndex >= 0 && roomIndex < ROOM_NAMES.length + 1) 
             ? ROOM_NAMES[roomIndex - 1] 
             : "Unknown Room";
     
