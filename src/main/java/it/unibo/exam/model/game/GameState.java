@@ -30,8 +30,8 @@ public class GameState {
     
     private void createRooms() {
         List<Door> room1Doors = List.of(
-            new Door(0, GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Cucina", 1, false),
-            new Door(0, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Gabinetto", 2, false),
+            new Door(0, GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Palestra", 1, false),
+            new Door(0, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Bar", 2, false),
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Laboratorio", 3, false),
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Aula 2.12", 4, false),
             new Door(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Giarino", 5, false));
