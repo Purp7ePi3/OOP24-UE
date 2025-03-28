@@ -4,3 +4,8 @@ bin/
 build/
 .vscode/
 .metals/
+
+.gradle/
+build/
+.vscode/
+.metals/

@@ -20,11 +20,9 @@ public final class Main {
         
         final JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(true);
         window.setTitle("UNIBO");
-        
-        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
         window.setVisible(true);
 
         window.add(new MainMenuPanel(window, gameController, puzzleController));

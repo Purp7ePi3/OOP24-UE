@@ -20,27 +20,46 @@ public class MainMenuPanel extends JPanel {
         System.out.println("Larghezza: " + width + "\nAltezza: " + height);
         // Layout del pannello per allineare i pulsanti
         setLayout(new BorderLayout());
+        setPreferredSize(window.getSize());
 
         // Crea il pannello centrale che conterrà i pulsanti
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));  // Colonna verticale per i pulsanti
-        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(20, 0, 20, 0); // Spaziatura tra pulsanti
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER; // Centra i pulsanti
+         // Distribuisce lo spazio in altezza
 
         // Creazione dei pulsanti
         JButton playButton = new JButton("Gioca");
         JButton optionsButton = new JButton("Opzioni");
         JButton exitButton = new JButton("Esci");
 
+        Dimension buttonSize = new Dimension(800, 80);
+        playButton.setPreferredSize(buttonSize);
+        optionsButton.setPreferredSize(buttonSize);
+        exitButton.setPreferredSize(buttonSize);
 
-        // List to speed-up size process
-        JButton[] buttons = {playButton, optionsButton, exitButton};
-        for (JButton button : buttons){
-            Dimension buttonSize = new Dimension(width, height);
-            button.setPreferredSize(buttonSize);
-            // Set max aand min size
-            button.setMaximumSize((buttonSize));  
-            button.setMinimumSize(buttonSize);  
-        }
+        // Imposta il font
+        Font buttonFont = new Font("Arial", Font.BOLD, 30);
+        playButton.setFont(buttonFont);
+        optionsButton.setFont(buttonFont);
+        exitButton.setFont(buttonFont);
+
+        // Aggiungiamo i pulsanti al pannello
+        buttonPanel.add(playButton, gbc);
+        gbc.gridy++; // Sposta il prossimo elemento più in basso
+        buttonPanel.add(optionsButton, gbc);
+        gbc.gridy++; // Sposta il prossimo elemento più in basso
+        buttonPanel.add(exitButton, gbc);
+
+        // Aggiunta del pannello alla finestra
+        add(buttonPanel, BorderLayout.CENTER);
+
+
         // Aggiunta degli ascoltatori di eventi sui pulsanti
         playButton.addActionListener(new ActionListener() {
             @Override
@@ -72,16 +91,6 @@ public class MainMenuPanel extends JPanel {
             }
         });
 
-        // Aggiungi gli spazi flessibili per centrare i pulsanti
-        buttonPanel.add(Box.createVerticalGlue()); // Spazio flessibile verticale sopra i pulsanti
-        buttonPanel.add(Box.createHorizontalGlue()); // Spazio flessibile orizzonale sopra i pulsanti
-        buttonPanel.add(playButton);
-        buttonPanel.add(Box.createVerticalGlue()); // Spazio flessibile verticale sopra i pulsanti
-        buttonPanel.add(optionsButton);
-        buttonPanel.add(Box.createVerticalGlue()); // Spazio flessibile verticale sopra i pulsanti
-        buttonPanel.add(exitButton);
-        buttonPanel.add(Box.createVerticalGlue());  // Spazio flessibile verticale dopo i pulsanti
-        // Aggiungi il pannello dei pulsanti al pannello principale (BorderLayout.CENTER)
-        add(buttonPanel, BorderLayout.CENTER);
+        
     }
 }

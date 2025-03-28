@@ -13,11 +13,8 @@ import it.unibo.exam.view.renderer.EntityRenderer;
 import it.unibo.exam.view.renderer.RoomRenderer;
 
 public class GamePanel extends JPanel implements Runnable {
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
-    Dimension dimension = toolkit.getScreenSize();
-    
-    public static final int ORIGINAL_WIDTH = 800;
-    public static final int ORIGINAL_HEIGHT = 600;
+    public static final int ORIGINAL_WIDTH = 1920;
+    public static final int ORIGINAL_HEIGHT = 1080;
     static final int ORIGINAL_TILE_SIZE = 16;
     static final int SCALE = 3;
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE;
