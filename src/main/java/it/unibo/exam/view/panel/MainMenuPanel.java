@@ -33,12 +33,6 @@ public class MainMenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Quando clicchi "Gioca", rimuoviamo il menu e carichiamo il gioco
                 window.getContentPane().removeAll();
-<<<<<<< HEAD
-                window.getContentPane().add(new GamePanel(gameController, puzzleController)); // Carica il GamePanel
-                window.setSize(800, 800);
-                window.revalidate();
-                window.repaint();
-=======
                 final GamePanel gamePanel = new GamePanel(gameController, puzzleController); // Update to pass PuzzleController
                 window.add(gamePanel);
                 gamePanel.requestFocusInWindow();//Aggiungo il focus per ricevere gli input da tastiera
@@ -46,7 +40,6 @@ public class MainMenuPanel extends JPanel {
                 window.setLocationRelativeTo(null);
                 window.setVisible(true);
                 gamePanel.startGameThread();
->>>>>>> Davide
             }
         });
 
