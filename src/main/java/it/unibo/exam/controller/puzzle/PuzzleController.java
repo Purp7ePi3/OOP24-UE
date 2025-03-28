@@ -5,11 +5,16 @@ import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.PuzzleRoom;
 import it.unibo.exam.model.room.Room;
+import it.unibo.exam.view.panel.MainMenuPanel;
 
 @SuppressWarnings("unused")
 public class PuzzleController {
     private final GameState gameState;
     private final KeyHandler keyHandler;
+    
+    private static final String[] ROOM_NAMES = {
+        "Palestra", "Bar", "Laboratorio", "aula 2.12", "giardino"
+    };
 
     public PuzzleController(GameState gameState, KeyHandler keyHandler) {
         this.gameState = gameState;
@@ -37,14 +42,16 @@ public class PuzzleController {
         // For now, we'll rely on the room's own state
         return false; // Simplified: assume we process each solve event once
     }
-
+    
     private void handlePuzzleSolved(PuzzleRoom room) {
         // Update the game state based on which puzzle room was solved
         int roomIndex = gameState.getCurrentRoomIndex();
         gameState.updateDoorState(roomIndex, true);
-        gameState.setLastInteraction("Puzzle in Room " + roomIndex + " Solved!");
-
-        // Additional logic could go here (e.g., unlocking items, changing rooms)
+        String roomName = (roomIndex >= 0 && roomIndex < ROOM_NAMES.length) 
+            ? ROOM_NAMES[roomIndex - 1] 
+            : "Unknown Room";
+    
+        gameState.setLastInteraction(roomName + " solved!");
     }
 
     // Getter if needed elsewhere

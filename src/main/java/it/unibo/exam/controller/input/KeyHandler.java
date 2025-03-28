@@ -3,6 +3,7 @@ package it.unibo.exam.controller.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+
 public final class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed, interactPressed;
     
