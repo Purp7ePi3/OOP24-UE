@@ -3,7 +3,6 @@ package it.unibo.exam.model.game;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes.Name;
 
 import it.unibo.exam.model.entity.Door;
 import it.unibo.exam.model.entity.Player;

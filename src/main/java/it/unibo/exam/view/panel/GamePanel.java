@@ -1,10 +1,7 @@
 package it.unibo.exam.view.panel;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
+
 import javax.swing.JPanel;
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import

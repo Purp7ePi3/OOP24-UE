@@ -10,6 +10,14 @@ import it.unibo.exam.controller.puzzle.PuzzleController;
 public class MainMenuPanel extends JPanel {
     
     public MainMenuPanel(JFrame window, GameController gameController, PuzzleController puzzleController) {
+
+        // Use toolKit to get width and height
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension dimension = toolkit.getScreenSize();
+
+        int width = (int)(dimension.width * 0.2);
+        int height = (int)(dimension.height * 0.2); 
+        System.out.println("Larghezza: " + width + "\nAltezza: " + height);
         // Layout del pannello per allineare i pulsanti
         setLayout(new BorderLayout());
         setPreferredSize(window.getSize());
