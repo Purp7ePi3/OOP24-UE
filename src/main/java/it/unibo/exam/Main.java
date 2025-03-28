@@ -1,13 +1,10 @@
 package it.unibo.exam;
 
-import javax.swing.*;
-import java.awt.*;
 import javax.swing.JFrame;
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.input.KeyHandler;
 import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
 import it.unibo.exam.model.game.GameState;
-import it.unibo.exam.view.panel.GamePanel;
 import it.unibo.exam.view.panel.MainMenuPanel;
 
 public final class Main {
@@ -31,7 +28,7 @@ public final class Main {
         window.setVisible(true);
 
         window.add(new MainMenuPanel(window, gameController, puzzleController));
-        window.pack();
+        //window.pack();
         window.setLocationRelativeTo(null);
         
 

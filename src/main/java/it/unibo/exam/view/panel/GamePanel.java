@@ -1,10 +1,7 @@
 package it.unibo.exam.view.panel;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
+
 import javax.swing.JPanel;
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
@@ -16,6 +13,9 @@ import it.unibo.exam.view.renderer.EntityRenderer;
 import it.unibo.exam.view.renderer.RoomRenderer;
 
 public class GamePanel extends JPanel implements Runnable {
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Dimension dimension = toolkit.getScreenSize();
+    
     public static final int ORIGINAL_WIDTH = 800;
     public static final int ORIGINAL_HEIGHT = 600;
     static final int ORIGINAL_TILE_SIZE = 16;
