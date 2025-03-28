@@ -1,5 +1,7 @@
 package it.unibo.exam;
 
+import javax.swing.*;
+import java.awt.*;
 import javax.swing.JFrame;
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.input.KeyHandler;
@@ -21,10 +23,11 @@ public final class Main {
         
         final JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setTitle("UNIBO");
         
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
         window.setVisible(true);
 
         window.add(new MainMenuPanel(window, gameController, puzzleController));

@@ -6,6 +6,7 @@ import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.view.panel.MainMenuPanel;
 
 public class GameController {
     private GameState gameState;

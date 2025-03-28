@@ -11,12 +11,21 @@ public class MainMenuPanel extends JPanel {
     
     public MainMenuPanel(JFrame window, GameController gameController, PuzzleController puzzleController) {
         // Layout del pannello per allineare i pulsanti
-        setLayout(new GridLayout(3, 1));
+        setLayout(new BorderLayout());
+
+        // Crea il pannello centrale che conterrà i pulsanti
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));  // Colonna verticale per i pulsanti
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Creazione dei pulsanti
         JButton playButton = new JButton("Gioca");
         JButton optionsButton = new JButton("Opzioni");
         JButton exitButton = new JButton("Esci");
+
+        playButton.setPreferredSize(new Dimension(1920, 1080));  // Impostare la larghezza per tutti i pulsanti
+        optionsButton.setPreferredSize(new Dimension(1920, 1080));
+        exitButton.setPreferredSize(new Dimension(1920, 1080));
 
         // Aggiunta degli ascoltatori di eventi sui pulsanti
         playButton.addActionListener(new ActionListener() {
@@ -24,10 +33,20 @@ public class MainMenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Quando clicchi "Gioca", rimuoviamo il menu e carichiamo il gioco
                 window.getContentPane().removeAll();
+<<<<<<< HEAD
                 window.getContentPane().add(new GamePanel(gameController, puzzleController)); // Carica il GamePanel
                 window.setSize(800, 800);
                 window.revalidate();
                 window.repaint();
+=======
+                final GamePanel gamePanel = new GamePanel(gameController, puzzleController); // Update to pass PuzzleController
+                window.add(gamePanel);
+                gamePanel.requestFocusInWindow();//Aggiungo il focus per ricevere gli input da tastiera
+                window.pack();
+                window.setLocationRelativeTo(null);
+                window.setVisible(true);
+                gamePanel.startGameThread();
+>>>>>>> Davide
             }
         });
 
@@ -47,8 +66,16 @@ public class MainMenuPanel extends JPanel {
         });
 
         // Aggiungiamo i pulsanti al pannello
-        add(playButton);
-        add(optionsButton);
-        add(exitButton);
+        buttonPanel.add(Box.createVerticalStrut(100));// Spazio vuoto sopra i pulsanti
+        buttonPanel.add(Box.createHorizontalStrut(100));  
+        buttonPanel.add(playButton);
+        buttonPanel.add(Box.createVerticalStrut(20));   // Spazio tra i pulsanti
+        buttonPanel.add(optionsButton);
+        buttonPanel.add(Box.createVerticalStrut(20));   // Spazio tra i pulsanti
+        buttonPanel.add(exitButton);
+        buttonPanel.add(Box.createVerticalStrut(100));  // Spazio vuoto sotto i pulsanti
+
+        // Aggiungi il pannello dei pulsanti al pannello principale
+        add(buttonPanel, BorderLayout.CENTER);
     }
 }
