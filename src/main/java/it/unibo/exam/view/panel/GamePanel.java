@@ -13,12 +13,14 @@ import it.unibo.exam.view.renderer.EntityRenderer;
 import it.unibo.exam.view.renderer.RoomRenderer;
 
 public class GamePanel extends JPanel implements Runnable {
-    public static final int ORIGINAL_WIDTH = 1920;
-    public static final int ORIGINAL_HEIGHT = 1080;
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final int ORIGINAL_WIDTH = 1000;
+    public static final int ORIGINAL_HEIGHT = 800;
     static final int ORIGINAL_TILE_SIZE = 16;
     static final int SCALE = 3;
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE;
-    
+
+
     private Thread gameThread;
     private GameController gameController;
     private PuzzleController puzzleController; // Add this field
@@ -30,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.puzzleController = puzzleController; // Initialize
         this.roomRenderer = new RoomRenderer();
         this.entityRenderer = new EntityRenderer();
+
         
         this.setPreferredSize(new Dimension(ORIGINAL_WIDTH, ORIGINAL_HEIGHT));
         this.setBackground(Color.BLACK);
