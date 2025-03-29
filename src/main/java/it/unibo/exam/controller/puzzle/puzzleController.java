@@ -13,7 +13,7 @@ public class PuzzleController {
     private final KeyHandler keyHandler;
     
     private static final String[] ROOM_NAMES = {
-        "Palestra", "Bar", "Laboratorio", "Aula 2.12", "Giardino"
+        "Palestra", "Bar", "Laboratorio", "aula 2.12", "giardino"
     };
 
     public PuzzleController(GameState gameState, KeyHandler keyHandler) {
@@ -47,7 +47,7 @@ public class PuzzleController {
         // Update the game state based on which puzzle room was solved
         int roomIndex = gameState.getCurrentRoomIndex();
         gameState.updateDoorState(roomIndex, true);
-        String roomName = (roomIndex >= 0 && roomIndex < ROOM_NAMES.length + 1) 
+        String roomName = (roomIndex >= 0 && roomIndex < ROOM_NAMES.length) 
             ? ROOM_NAMES[roomIndex - 1] 
             : "Unknown Room";
     
@@ -59,3 +59,4 @@ public class PuzzleController {
         return gameState;
     }
 }
+
