@@ -22,8 +22,8 @@ public class Player extends Entity {
     public Player(int x, int y, int speed) {
         this.x = x;
         this.y = y;
-        this.width = GamePanel.TILE_SIZE;
-        this.height = GamePanel.TILE_SIZE;
+        this.width = 80;
+        this.height = 80;
         this.speed = speed;
         this.hitbox = new Rectangle(x, y, width, height);
     }

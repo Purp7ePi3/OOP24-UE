@@ -43,18 +43,26 @@ public class AssetLoader {
             playerWalkRight = new BufferedImage[4];
             
             // Load player idle textures
-            playerIdleDown = loadImage("/player/player_idle_down.png");
-            playerIdleUp = loadImage("/player/player_idle_up.png");
-            playerIdleLeft = loadImage("/player/player_idle_left.png");
-            playerIdleRight = loadImage("/player/player_idle_right.png");
+            playerIdleDown = loadImage("/it/unibo/exam/view/texture/player/player.png");
+            playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player.png");
+            playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_left.png");
+            playerIdleRight = loadImage("/it/unibo/exam/view/texture/player/player_right.png");
             
             // Load player walking animations
             for (int i = 0; i < 4; i++) {
-                playerWalkDown[i] = loadImage("/player/player_walk_down_" + i + ".png");
-                playerWalkUp[i] = loadImage("/player/player_walk_up_" + i + ".png");
-                playerWalkLeft[i] = loadImage("/player/player_walk_left_" + i + ".png");
-                playerWalkRight[i] = loadImage("/player/player_walk_right_" + i + ".png");
+                playerWalkDown[i] = loadImage("/it/unibo/exam/view/texture/player/player.png");
+                playerWalkUp[i] = loadImage("/it/unibo/exam/view/texture/player/player.png");
+                playerWalkLeft[i] = loadImage("/it/unibo/exam/view/texture/player/player_left.png");
+                playerWalkRight[i] = loadImage("/it/unibo/exam/view/texture/player/player_right.png");
             }
+
+            //Immagini del movimento non ancora pronte, per adesso sto usando quelle statiche
+            /*for (int i = 0; i < 4; i++) {
+                playerWalkDown[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_" + i + ".png");
+                playerWalkUp[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_" + i + ".png");
+                playerWalkLeft[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_" + i + ".png");
+                playerWalkRight[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_" + i + ".png");
+            }*/
             
             assetsLoaded = true;
             System.out.println("Game assets loaded successfully!");
