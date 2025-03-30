@@ -20,6 +20,11 @@ public class AssetLoader {
     private BufferedImage[] playerWalkLeft;
     private BufferedImage[] playerWalkRight;
     
+    // Animation variables
+    private int frameIndex = 0;
+    private int frameDelay = 2; // Number of updates before changing frame
+    private int frameCounter = 0;
+
     // Track if assets were successfully loaded
     private boolean assetsLoaded = false;
     
@@ -98,9 +103,32 @@ public class AssetLoader {
         return defaultImage;
     }
 
+    
+
     public boolean areAssetsLoaded() {
         return assetsLoaded;
     }
+
+
+    // Update animation frame
+    public void updateAnimation() {
+        frameCounter++;
+        if (frameCounter >= frameDelay) {
+            frameCounter = 0;
+            frameIndex = (frameIndex + 1) % playerWalkDown.length;
+        }
+    }
+    
+   /*  // Get current animated player frame based on direction
+    public BufferedImage getCurrentPlayerFrame(String direction) {
+        switch (direction) {
+            case "up": return playerWalkUp[frameIndex];
+            case "down": return playerWalkDown[frameIndex];
+            case "left": return playerWalkLeft[frameIndex];
+            case "right": return playerWalkRight[frameIndex];
+            default: return playerIdleDown;
+        }
+    }*/
     
     // Getters for player textures
     public BufferedImage getPlayerIdleUp() {

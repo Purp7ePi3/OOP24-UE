@@ -7,6 +7,7 @@ import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.GamePanel;
 import it.unibo.exam.view.panel.MainMenuPanel;
+import it.unibo.exam.view.texture.AssetLoader;
 
 public class GameController {
     private GameState gameState;
@@ -34,7 +35,8 @@ public class GameController {
         Player player = gameState.getPlayer();
         player.move(keyHandler.upPressed, keyHandler.downPressed, 
                    keyHandler.leftPressed, keyHandler.rightPressed, deltaTime);
-        
+
+
         // Check door interactions
         Room currentRoom = gameState.getCurrentRoom();
         for (Door door : currentRoom.getDoors()) {

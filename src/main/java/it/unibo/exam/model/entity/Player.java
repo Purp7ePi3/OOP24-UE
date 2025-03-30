@@ -2,6 +2,7 @@ package it.unibo.exam.model.entity;
 
 import java.awt.Rectangle;
 import it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.view.texture.AssetLoader;
 
 public class Player extends Entity {
     private int speed;
@@ -26,6 +27,8 @@ public class Player extends Entity {
         this.height = 80;
         this.speed = speed;
         this.hitbox = new Rectangle(x, y, width, height);
+        
+        
     }
     
     public void move(boolean up, boolean down, boolean left, boolean right, double deltaTime) {
