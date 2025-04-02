@@ -9,7 +9,7 @@ import it.unibo.exam.controller.puzzle.PuzzleController;
 
 public class MainMenuPanel extends JPanel {
     
-    public MainMenuPanel(JFrame window, GameController gameController, PuzzleController puzzleController) {
+    public MainMenuPanel(JFrame window, GameController gameController, PuzzleController puzzleController, int maxWidth, int maxHeight) {
 
         // Use toolKit to get width and height
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -66,7 +66,7 @@ public class MainMenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Quando clicchi "Gioca", rimuoviamo il menu e carichiamo il gioco
                 window.getContentPane().removeAll();
-                final GamePanel gamePanel = new GamePanel(gameController, puzzleController); // Update to pass PuzzleController
+                final GamePanel gamePanel = new GamePanel(gameController, puzzleController, maxWidth, maxHeight); // Pass maxWidth and maxHeight
                 window.add(gamePanel);
                 gamePanel.requestFocusInWindow();//Aggiungo il focus per ricevere gli input da tastiera
                 window.pack();

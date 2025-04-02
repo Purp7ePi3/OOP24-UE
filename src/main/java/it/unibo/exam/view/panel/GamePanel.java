@@ -1,10 +1,9 @@
 package it.unibo.exam.view.panel;
 
 import java.awt.*;
-
 import javax.swing.JPanel;
 import it.unibo.exam.controller.game.GameController;
-import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
+import it.unibo.exam.controller.puzzle.PuzzleController;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.PuzzleRoom;
@@ -21,17 +20,26 @@ public class GamePanel extends JPanel implements Runnable {
     
     private Thread gameThread;
     private GameController gameController;
-    private PuzzleController puzzleController; // Add this field
+    private PuzzleController puzzleController;
     private RoomRenderer roomRenderer;
     private EntityRenderer entityRenderer;
+
+    // Get screen size
+    private static final Rectangle SCREEN_BOUNDS = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+    public static final int MAX_WIDTH = SCREEN_BOUNDS.width;
+    public static final int MAX_HEIGHT = SCREEN_BOUNDS.height;
+
+    // Add scale factors for resizing
+    private double scaleX = 1.0;
+    private double scaleY = 1.0;
     
-    public GamePanel(GameController gameController, PuzzleController puzzleController) { // Update constructor
+    public GamePanel(GameController gameController, PuzzleController puzzleController, int maxWidth, int maxHeight) {
         this.gameController = gameController;
-        this.puzzleController = puzzleController; // Initialize
+        this.puzzleController = puzzleController;
         this.roomRenderer = new RoomRenderer();
         this.entityRenderer = new EntityRenderer();
         
-        this.setPreferredSize(new Dimension(ORIGINAL_WIDTH, ORIGINAL_HEIGHT));
+        this.setPreferredSize(new Dimension(maxWidth, maxHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(gameController.getKeyHandler());
@@ -59,8 +67,9 @@ public class GamePanel extends JPanel implements Runnable {
             long currentTime = System.nanoTime();
             deltaTime = (currentTime - lastTime) / 1_000_000_000.0;
             
+            updateScaleFactors();
             gameController.update(deltaTime);
-            puzzleController.update(deltaTime); // Add this to update puzzle logic
+            puzzleController.update(deltaTime);
             gameController.updateFPS();
             repaint();
             
@@ -76,10 +85,18 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
     
+    private void updateScaleFactors() {
+        scaleX = (double) getWidth() / ORIGINAL_WIDTH;
+        scaleY = (double) getHeight() / ORIGINAL_HEIGHT;
+    }
+    
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         final Graphics2D g2 = (Graphics2D) g;
+        
+        // Apply scale transformations
+        g2.scale(scaleX, scaleY);
         
         GameState gameState = gameController.getGameState();
         Room currentRoom = gameState.getCurrentRoom();
@@ -103,16 +120,25 @@ public class GamePanel extends JPanel implements Runnable {
         FontMetrics metrics = g2.getFontMetrics();
         
         String fpsText = "FPS: " + gameController.getFPS();
-        g2.drawString(fpsText, getWidth() - metrics.stringWidth(fpsText) - 20, 30);
+        g2.drawString(fpsText, ORIGINAL_WIDTH - metrics.stringWidth(fpsText) - 20, 30);
         
         String lastInteraction = gameState.getLastInteraction();
         if (!lastInteraction.isEmpty()) {
             int textWidth = metrics.stringWidth(lastInteraction);
-            int textX = (getWidth() - textWidth) / 2;
+            int textX = (ORIGINAL_WIDTH - textWidth) / 2;
             g2.drawString(lastInteraction, textX, 60);
         }
         
-        String roomIndexText = "Current Room Index: " + gameState.getCurrentRoomIndex();
+        String roomIndexText = "Current Room: " + gameState.getCurrentRoomIndex();
         g2.drawString(roomIndexText, 20, 30);
+    }
+    
+    // Method to convert screen coordinates to game coordinates
+    public int getGameCoordX(int screenX) {
+        return (int)(screenX / scaleX);
+    }
+    
+    public int getGameCoordY(int screenY) {
+        return (int)(screenY / scaleY);
     }
 }
