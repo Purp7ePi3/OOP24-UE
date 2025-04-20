@@ -3,7 +3,7 @@ package it.unibo.exam;
 import javax.swing.JFrame;
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.input.KeyHandler;
-import it.unibo.exam.controller.puzzle.puzzleController; // Add this import
+import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.view.panel.MainMenuPanel;
 
@@ -16,7 +16,7 @@ public final class Main {
         KeyHandler keyHandler = new KeyHandler();
         GameState gameState = new GameState();
         GameController gameController = new GameController(gameState, keyHandler);
-        puzzleController puzzleController = new puzzleController(gameState, keyHandler); // Add this
+        PuzzleController puzzleController = new PuzzleController(gameState, keyHandler); // Add this
         
         final JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

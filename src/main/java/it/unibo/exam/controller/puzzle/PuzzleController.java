@@ -8,7 +8,7 @@ import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.MainMenuPanel;
 
 @SuppressWarnings("unused")
-public class puzzleController {
+public class PuzzleController {
     private final GameState gameState;
     private final KeyHandler keyHandler;
     
@@ -16,7 +16,7 @@ public class puzzleController {
         "Palestra", "Bar", "Laboratorio", "Aula 2.12", "Giardino"
     };
 
-    public puzzleController(GameState gameState, KeyHandler keyHandler) {
+    public PuzzleController(GameState gameState, KeyHandler keyHandler) {
         this.gameState = gameState;
         this.keyHandler = keyHandler;
     }
@@ -59,4 +59,3 @@ public class puzzleController {
         return gameState;
     }
 }
-
