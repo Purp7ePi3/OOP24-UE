@@ -8,11 +8,11 @@ import it.unibo.exam.model.entity.Door;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.view.panel.GamePanel;
 
-public class PuzzleRoom2 extends Room implements PuzzleRoom {
+public class PuzzleRoom3 extends Room implements PuzzleRoom {
     private boolean puzzleSolved = false;
     private final GameState gameState;
     
-    public PuzzleRoom2(final List<Door> doors, final GameState gameState) {
+    public PuzzleRoom3(final List<Door> doors, final GameState gameState) {
         super(Color.GRAY, doors);
         this.gameState = gameState;
     }
@@ -29,7 +29,7 @@ public class PuzzleRoom2 extends Room implements PuzzleRoom {
                 puzzleSolved = true;
                 firstDoor.setSolved(true);
                 // Update the door in the main room
-                gameState.updateDoorState(2, true); // 1 is the index of this puzzle room
+                gameState.updateDoorState(3, true); // 1 is the index of this puzzle room
                 // Change room color
                 setBackgroundColor(Color.PINK);
             }

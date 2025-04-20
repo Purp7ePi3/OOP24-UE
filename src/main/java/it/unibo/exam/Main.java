@@ -5,7 +5,7 @@ import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.input.KeyHandler;
 import it.unibo.exam.controller.puzzle.puzzleController; // Add this import
 import it.unibo.exam.model.game.GameState;
-import it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.view.panel.MainMenuPanel;
 
 public final class Main {
     private Main() {
@@ -20,14 +20,15 @@ public final class Main {
         
         final JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        window.setResizable(true);
         window.setTitle("UNIBO");
-        
-        final GamePanel gamePanel = new GamePanel(gameController, puzzleController); // Update to pass PuzzleController
-        window.add(gamePanel);
-        window.pack();
-        window.setLocationRelativeTo(null);
         window.setVisible(true);
-        gamePanel.startGameThread();
+
+        window.add(new MainMenuPanel(window, gameController, puzzleController));
+        //window.pack();
+        window.setLocationRelativeTo(null);
+        
+
     }
 }
