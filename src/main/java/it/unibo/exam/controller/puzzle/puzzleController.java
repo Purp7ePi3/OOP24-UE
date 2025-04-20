@@ -7,11 +7,11 @@ import it.unibo.exam.model.room.PuzzleRoom;
 import it.unibo.exam.model.room.Room;
 
 @SuppressWarnings("unused")
-public class PuzzleController {
+public class puzzleController {
     private final GameState gameState;
     private final KeyHandler keyHandler;
 
-    public PuzzleController(GameState gameState, KeyHandler keyHandler) {
+    public puzzleController(GameState gameState, KeyHandler keyHandler) {
         this.gameState = gameState;
         this.keyHandler = keyHandler;
     }
