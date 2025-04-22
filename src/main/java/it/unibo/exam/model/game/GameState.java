@@ -1,13 +1,12 @@
 package it.unibo.exam.model.game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.IntStream;
-
 import it.unibo.exam.model.entity.Door;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.room.Room;
+import it.unibo.exam.model.room.TheBar.PuzzleRoom2;
+import it.unibo.exam.model.room.*;
 import it.unibo.exam.view.panel.GamePanel;
+
 
 public class GameState {
     private List<Room> rooms;
