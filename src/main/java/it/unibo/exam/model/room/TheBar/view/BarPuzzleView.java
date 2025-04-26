@@ -3,12 +3,18 @@ package it.unibo.exam.model.room.TheBar.view;
 import it.unibo.exam.model.room.TheBar.model.BarPuzzleModel;
 import it.unibo.exam.model.room.TheBar.model.Tube;
 import java.awt.*;
+import java.awt.image.*;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import it.unibo.exam.view.panel.GamePanel;
 
+@SuppressWarnings("unused")
 public class BarPuzzleView implements BarPuzzleViewInterface {
 
     private final BarPuzzleModel model;
+    private final Image backgroundImage;
 
     private static final int TUBE_WIDTH = 60;
     private static final int TUBE_HEIGHT = 200;
@@ -17,6 +23,15 @@ public class BarPuzzleView implements BarPuzzleViewInterface {
 
     public BarPuzzleView(BarPuzzleModel model) {
         this.model = model;
+        Image img = null;
+        try {
+            img = ImageIO.read(new File(
+                "src/main/java/it/unibo/exam/model/room/TheBar/view/png/BarMinigame.png"
+            ));
+        } catch (IOException e) {
+            System.err.println("❌ Could not load BarMinigame.png: " + e.getMessage());
+        }
+        this.backgroundImage = img;
     }
 
     @Override
@@ -29,8 +44,12 @@ public class BarPuzzleView implements BarPuzzleViewInterface {
     }
 
     private void drawBackground(Graphics2D g2) {
-        g2.setColor(Color.DARK_GRAY);
-        g2.fillRect(0, 0, GamePanel.ORIGINAL_WIDTH, GamePanel.ORIGINAL_HEIGHT);
+        if (backgroundImage != null) {
+            g2.drawImage(backgroundImage, 0, 0, GamePanel.ORIGINAL_WIDTH, GamePanel.ORIGINAL_HEIGHT, null);
+        } else {
+            g2.setColor(Color.DARK_GRAY);
+            g2.fillRect(0, 0, GamePanel.ORIGINAL_WIDTH, GamePanel.ORIGINAL_HEIGHT);
+        }
     }
 
     private void drawTubes(Graphics2D g2) {
@@ -46,13 +65,11 @@ public class BarPuzzleView implements BarPuzzleViewInterface {
     }
 
     private void drawSingleTube(Graphics2D g2, Tube tube, int x, int y, boolean isSelected) {
-        // Tube frame
         g2.setColor(Color.WHITE);
         g2.fillRect(x, y, TUBE_WIDTH, TUBE_HEIGHT);
         g2.setColor(Color.BLACK);
         g2.drawRect(x, y, TUBE_WIDTH, TUBE_HEIGHT);
 
-        // Liquids inside
         List<Color> contents = tube.getContents();
         for (int j = 0; j < contents.size(); j++) {
             g2.setColor(contents.get(j));
