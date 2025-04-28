@@ -7,8 +7,7 @@ import it.unibo.exam.model.room.TheBar.model.Tube;
 
 public class BarPuzzleController implements BarPuzzleControllerInterface {
     private final BarPuzzleModelInterface model;
-    private int hoveredIndex   = 0;  // which tube the player is “on”
-    private int selectedIndex  = -1; // -1 = none chosen as source
+    private int hoveredIndex = 0;  // which tube the player is “on”
 
     public BarPuzzleController(BarPuzzleModelInterface model) {
         this.model = model;
@@ -22,7 +21,6 @@ public class BarPuzzleController implements BarPuzzleControllerInterface {
         // ← Move hover left
         if (keyHandler.leftPressed) {
             hoveredIndex = (hoveredIndex - 1 + n) % n;
-            // prevent repeated rapid moves:
             keyHandler.leftPressed = false;
         }
 
@@ -32,25 +30,16 @@ public class BarPuzzleController implements BarPuzzleControllerInterface {
             keyHandler.rightPressed = false;
         }
 
-        // E = select or pour
+        // E = select or pour (delegated entirely to the model)
         if (keyHandler.interactPressed) {
             keyHandler.interactPressed = false;
-
-            if (selectedIndex < 0) {
-                // first press: choose the source tube
-                selectedIndex = hoveredIndex;
-            } else {
-                // second press: attempt to pour into hovered tube
-                model.tryPour(selectedIndex, hoveredIndex);
-                // reset selection (even if pour failed)
-                selectedIndex = -1;
-            }
+            model.selectTube(hoveredIndex);
         }
     }
 
     @Override
     public void resetSelection() {
-        selectedIndex = -1;
+        model.selectTube(-1); // or you could add a dedicated model.reset() if you prefer
     }
 
     /** 
@@ -64,6 +53,6 @@ public class BarPuzzleController implements BarPuzzleControllerInterface {
      * For the View: which tube is currently chosen as source (–1 if none).
      */
     public int getSelectedIndex() {
-        return selectedIndex;
+        return model.getSelectedTubeIndex();
     }
 }
