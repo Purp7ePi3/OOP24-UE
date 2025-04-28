@@ -95,12 +95,17 @@ public class BarPuzzleModel implements BarPuzzleModelInterface {
 
     @Override
     public boolean isPuzzleSolved() {
-        // solved if every non-empty tube is uniform
-        for (Tube t : tubes) {
-            if (!t.isEmpty() && !t.isUniform()) {
+        for (Tube tube : tubes) {
+            if (tube.isEmpty()) {
+                // empty “extra” tubes are fine
+                continue;
+            }
+            // must be exactly full AND all one color
+            if (tube.size() < TubeInterface.CAPACITY || !tube.isUniform()) {
                 return false;
             }
         }
         return true;
     }
+    
 }

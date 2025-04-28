@@ -3,14 +3,13 @@ package it.unibo.exam.model.room.TheBar.model;
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 
 public class Tube implements TubeInterface {
 
     private final Deque<Color> contents = new ArrayDeque<>();
-    private static final int CAPACITY = 4;
-
 
     public Tube() {}
 
@@ -43,8 +42,8 @@ public class Tube implements TubeInterface {
 
     @Override
     public void push(Color color) {
-        if (contents.size() < CAPACITY) {
-            contents.push(color);
+        if (contents.size() < TubeInterface.CAPACITY) {
+            contents.push(color);   
         } else {
             throw new IllegalStateException("Tube is full, cannot push more liquids");
         }
@@ -58,6 +57,9 @@ public class Tube implements TubeInterface {
 
     @Override
     public List<Color> getContents() {
-        return new ArrayList<>(contents); // preserves top-to-bottom order
+        List<Color> list = new ArrayList<>(contents);
+        Collections.reverse(list);          // now index 0 is the bottom layer
+        return list;
     }
+
 }

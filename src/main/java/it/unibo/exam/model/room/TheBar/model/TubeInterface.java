@@ -5,6 +5,9 @@ import java.util.List;
 
 public interface TubeInterface {
     
+     /** Max number of liquid levels in a tube */
+     public static final int CAPACITY = 4;
+
     /**
      * Checks if the tube is empty.
      * @return true if no liquids are in the tube.
