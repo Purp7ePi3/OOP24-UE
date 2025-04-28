@@ -1,5 +1,6 @@
 package it.unibo.exam.model.room.TheBar.view;
 
+import it.unibo.exam.model.room.TheBar.controller.BarPuzzleController;
 import it.unibo.exam.model.room.TheBar.model.BarPuzzleModel;
 import it.unibo.exam.model.room.TheBar.model.Tube;
 import java.awt.*;
@@ -14,6 +15,7 @@ import it.unibo.exam.view.panel.GamePanel;
 public class BarPuzzleView implements BarPuzzleViewInterface {
 
     private final BarPuzzleModel model;
+    private final BarPuzzleController controller;
     private final Image backgroundImage;
 
     private static final int TUBE_WIDTH = 60;
@@ -21,8 +23,9 @@ public class BarPuzzleView implements BarPuzzleViewInterface {
     private static final int TUBE_SPACING = 40;
     private static final int LIQUID_HEIGHT = TUBE_HEIGHT / 4;
 
-    public BarPuzzleView(BarPuzzleModel model) {
+    public BarPuzzleView(BarPuzzleModel model, BarPuzzleController controller) {
         this.model = model;
+        this.controller = controller;
         Image img = null;
         try {
             img = ImageIO.read(new File(
@@ -54,37 +57,58 @@ public class BarPuzzleView implements BarPuzzleViewInterface {
 
     private void drawTubes(Graphics2D g2) {
         List<Tube> tubes = model.getTubes();
-        int selectedIndex = model.getSelectedTubeIndex();
+        int hoveredIndex  = controller.getHoveredIndex();
+        int selectedIndex = controller.getSelectedIndex();        
         int startX = (GamePanel.ORIGINAL_WIDTH - (tubes.size() * (TUBE_WIDTH + TUBE_SPACING))) / 2;
         int y = GamePanel.ORIGINAL_HEIGHT / 2 - TUBE_HEIGHT / 2;
 
         for (int i = 0; i < tubes.size(); i++) {
             int x = startX + i * (TUBE_WIDTH + TUBE_SPACING);
-            drawSingleTube(g2, tubes.get(i), x, y, i == selectedIndex);
+            boolean isHovered  = (i == hoveredIndex && i != selectedIndex);
+            boolean isSelected = (i == selectedIndex);
+            drawSingleTube(g2, tubes.get(i), x, y, isHovered, isSelected);
+            
         }
     }
 
-    private void drawSingleTube(Graphics2D g2, Tube tube, int x, int y, boolean isSelected) {
+    private void drawSingleTube(Graphics2D g2,
+    Tube tube,
+    int x, int y,
+    boolean isHovered,
+    boolean isSelected) {
+        // Draw the tube with its contents and highlights
+        // 1) Tube frame
         g2.setColor(Color.WHITE);
         g2.fillRect(x, y, TUBE_WIDTH, TUBE_HEIGHT);
         g2.setColor(Color.BLACK);
         g2.drawRect(x, y, TUBE_WIDTH, TUBE_HEIGHT);
 
+        // 2) Liquids (bottom → top)
         List<Color> contents = tube.getContents();
         for (int j = 0; j < contents.size(); j++) {
-            g2.setColor(contents.get(j));
-            g2.fillRect(
-                x + 5,
-                y + TUBE_HEIGHT - (j + 1) * LIQUID_HEIGHT,
-                TUBE_WIDTH - 10,
-                LIQUID_HEIGHT
-            );
+        g2.setColor(contents.get(j));
+        g2.fillRect(
+        x + 5,
+        y + TUBE_HEIGHT - (j + 1) * LIQUID_HEIGHT,
+        TUBE_WIDTH - 10,
+        LIQUID_HEIGHT
+        );
         }
 
-        if (isSelected) {
-            drawSelectionHighlight(g2, x, y);
+        // 3) Hover highlight (thin blue border)
+        if (isHovered) {
+        g2.setColor(Color.BLUE);
+        g2.setStroke(new BasicStroke(2));
+        g2.drawRect(x - 3, y - 3, TUBE_WIDTH + 6, TUBE_HEIGHT + 6);
+        g2.setStroke(new BasicStroke(1));
         }
-    }
+
+        // 4) Selection highlight (thick green border)
+        if (isSelected) {
+        drawSelectionHighlight(g2, x, y);
+        }
+}
+
 
     private void drawSelectionHighlight(Graphics2D g2, int x, int y) {
         g2.setColor(Color.GREEN);

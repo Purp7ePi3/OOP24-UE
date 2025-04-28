@@ -65,9 +65,10 @@ public class PuzzleRoom2 extends Room implements PuzzleRoom {
                 List<Color> palette = List.of(
                     Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW
                 );
-                puzzleModel      = new BarPuzzleModel(palette, 2); // 2 empty tubes
-                puzzleView       = new BarPuzzleView(puzzleModel);
+                puzzleModel      = new BarPuzzleModel(palette, 2);
                 puzzleController = new BarPuzzleController(puzzleModel);
+                puzzleView       = new BarPuzzleView(puzzleModel, puzzleController);
+                
             }
 
         } else {
