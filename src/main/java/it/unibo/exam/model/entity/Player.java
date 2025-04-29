@@ -73,13 +73,29 @@ public class Player extends Entity {
         updateHitbox();
         
         // Update animation
-        if (moving) {
-            spriteCounter += deltaTime * 10;
-            if (spriteCounter > 1) {
-                spriteNum = (spriteNum + 1) % 4; // Cycle through 4 frames
+        if(moving){
+            spriteCounter++;
+            if (spriteCounter >= 15) {
+                if(spriteNum == 0){
+                    spriteNum = 1;
+                }
+                else if(spriteNum == 1){
+                    spriteNum = 0;
+                }
                 spriteCounter = 0;
             }
         }
+           
+        
+
+        
+        /*if (moving) {
+            spriteCounter += deltaTime * 10;
+            if (spriteCounter > 1) {
+                spriteNum = (spriteNum + 1) % 2; // Cycle through 2 frames
+                spriteCounter = 0;
+            }
+        }*/
     }
     
     public int getSpeed() {

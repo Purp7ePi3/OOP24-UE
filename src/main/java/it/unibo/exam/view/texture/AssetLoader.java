@@ -19,10 +19,11 @@ public class AssetLoader {
     private BufferedImage[] playerWalkDown;
     private BufferedImage[] playerWalkLeft;
     private BufferedImage[] playerWalkRight;
-    
+
+
     // Animation variables
     private int frameIndex = 0;
-    private int frameDelay = 2; // Number of updates before changing frame
+    private int frameDelay = 10; // Number of updates before changing frame
     private int frameCounter = 0;
 
     // Track if assets were successfully loaded
@@ -52,16 +53,8 @@ public class AssetLoader {
             playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player_back.png");
             playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_left.png");
             playerIdleRight = loadImage("/it/unibo/exam/view/texture/player/player_right.png");
-            
-            // Load player walking animations
-            /*for (int i = 0; i < 4; i++) {
-                playerWalkDown[i] = loadImage("/it/unibo/exam/view/texture/player/player.png");
-                playerWalkUp[i] = loadImage("/it/unibo/exam/view/texture/player/player.png");
-                playerWalkLeft[i] = loadImage("/it/unibo/exam/view/texture/player/player_left.png");
-                playerWalkRight[i] = loadImage("/it/unibo/exam/view/texture/player/player_right.png");
-            }*/
 
-            //Immagini del movimento non ancora pronte, per adesso sto usando quelle statiche
+            
             for (int i = 0; i < 2; i++) {
                 playerWalkDown[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_front_" + i + ".png");
                 playerWalkUp[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_back_" + i + ".png");
@@ -103,33 +96,10 @@ public class AssetLoader {
         return defaultImage;
     }
 
-    
-
     public boolean areAssetsLoaded() {
         return assetsLoaded;
     }
 
-
-    // Update animation frame
-    public void updateAnimation() {
-        frameCounter++;
-        if (frameCounter >= frameDelay) {
-            frameCounter = 0;
-            frameIndex = (frameIndex + 1) % playerWalkDown.length;
-        }
-    }
-    
-   /*  // Get current animated player frame based on direction
-    public BufferedImage getCurrentPlayerFrame(String direction) {
-        switch (direction) {
-            case "up": return playerWalkUp[frameIndex];
-            case "down": return playerWalkDown[frameIndex];
-            case "left": return playerWalkLeft[frameIndex];
-            case "right": return playerWalkRight[frameIndex];
-            default: return playerIdleDown;
-        }
-    }*/
-    
     // Getters for player textures
     public BufferedImage getPlayerIdleUp() {
         return playerIdleUp;
