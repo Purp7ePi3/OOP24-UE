@@ -45,7 +45,7 @@ public class GameState {
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
         rooms.add(new PuzzleRoom4(List.of(
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
-        rooms.add(new PuzzleRoom4(List.of(
+        rooms.add(new PuzzleRoom5(List.of(
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
         }
 

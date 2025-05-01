@@ -44,10 +44,10 @@ public class AssetLoader {
             playerWalkRight = new BufferedImage[3];
             
             // Load player idle textures
-            playerIdleDown = loadImage("/it/unibo/exam/view/texture/player/player_walk_front_1.png");
-            playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player_walk_back_1.png");
-            playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_walk_left_1.png");
-            playerIdleRight = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_1.png");
+            playerIdleDown = loadImage("/it/unibo/exam/view/texture/player/player_front_1.png");
+            playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player_back_1.png");
+            playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_left_1.png");
+            playerIdleRight = loadImage("/it/unibo/exam/view/texture/player/player_right_1.png");
 
             
             for (int i = 0; i < 3; i++) {
