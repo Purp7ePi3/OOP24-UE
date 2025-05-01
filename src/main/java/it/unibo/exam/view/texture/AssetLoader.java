@@ -21,11 +21,6 @@ public class AssetLoader {
     private BufferedImage[] playerWalkRight;
 
 
-    // Animation variables
-    private int frameIndex = 0;
-    private int frameDelay = 10; // Number of updates before changing frame
-    private int frameCounter = 0;
-
     // Track if assets were successfully loaded
     private boolean assetsLoaded = false;
     
@@ -43,19 +38,19 @@ public class AssetLoader {
     private void loadAssets() {
         try {
             // Initialize arrays first to prevent NullPointerExceptions
-            playerWalkDown = new BufferedImage[2];
-            playerWalkUp = new BufferedImage[2];
-            playerWalkLeft = new BufferedImage[2];
-            playerWalkRight = new BufferedImage[2];
+            playerWalkDown = new BufferedImage[3];
+            playerWalkUp = new BufferedImage[3];
+            playerWalkLeft = new BufferedImage[3];
+            playerWalkRight = new BufferedImage[3];
             
             // Load player idle textures
-            playerIdleDown = loadImage("/it/unibo/exam/view/texture/player/player.png");
-            playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player_back.png");
-            playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_left.png");
-            playerIdleRight = loadImage("/it/unibo/exam/view/texture/player/player_right.png");
+            playerIdleDown = loadImage("/it/unibo/exam/view/texture/player/player_walk_front_1.png");
+            playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player_walk_back_1.png");
+            playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_walk_left_1.png");
+            playerIdleRight = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_1.png");
 
             
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 playerWalkDown[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_front_" + i + ".png");
                 playerWalkUp[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_back_" + i + ".png");
                 playerWalkLeft[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_left_" + i + ".png");

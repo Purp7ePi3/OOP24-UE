@@ -76,12 +76,14 @@ public class Player extends Entity {
         if(moving){
             spriteCounter++;
             if (spriteCounter >= 15) {
+                
                 if(spriteNum == 0){
                     spriteNum = 1;
                 }
                 else if(spriteNum == 1){
-                    spriteNum = 0;
+                    spriteNum = 2;
                 }
+
                 spriteCounter = 0;
             }
         }
