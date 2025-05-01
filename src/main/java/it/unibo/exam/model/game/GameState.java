@@ -34,7 +34,7 @@ public class GameState {
             new Door(0, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Bar", 2, false),
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Laboratorio", 3, false),
             new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Aula 2.12", 4, false),
-            new Door(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Giarino", 5, false));
+            new Door(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Giardino", 5, false));
         rooms.add(new Room(Color.GRAY, room1Doors));
         
         rooms.add(new PuzzleRoom1(List.of(
