@@ -8,6 +8,8 @@ import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.GamePanel;
 import javax.swing.JOptionPane;
+import it.unibo.exam.view.panel.MainMenuPanel;
+import it.unibo.exam.view.texture.AssetLoader;
 
 /**
  * GameController is responsible for managing the game state and player interactions.
@@ -40,7 +42,8 @@ public class GameController {
         Player player = gameState.getPlayer();
         player.move(keyHandler.upPressed, keyHandler.downPressed, 
                    keyHandler.leftPressed, keyHandler.rightPressed, deltaTime);
-        
+
+
         // Check door interactions
         Room currentRoom = gameState.getCurrentRoom();
         NPC npc = currentRoom.getNPC();
