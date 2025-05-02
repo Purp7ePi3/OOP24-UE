@@ -6,11 +6,8 @@ import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.GamePanel;
-<<<<<<< HEAD
-=======
 import it.unibo.exam.view.panel.MainMenuPanel;
 import it.unibo.exam.view.texture.AssetLoader;
->>>>>>> Davide
 
 public class GameController {
     private GameState gameState;

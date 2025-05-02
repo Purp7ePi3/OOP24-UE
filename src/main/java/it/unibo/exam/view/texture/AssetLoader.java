@@ -44,19 +44,6 @@ public class AssetLoader {
             playerWalkRight = new BufferedImage[3];
             
             // Load player idle textures
-<<<<<<< HEAD
-            playerIdleDown = loadImage("/player/player.png");
-            playerIdleUp = loadImage("/player/player.png");
-            playerIdleLeft = loadImage("/player/player.png");
-            playerIdleRight = loadImage("/player/player.png");
-            
-            // Load player walking animations
-            for (int i = 0; i < 4; i++) {
-                playerWalkDown[i] = loadImage("/player/player.png");
-                playerWalkUp[i] = loadImage("/player/player.png");
-                playerWalkLeft[i] = loadImage("/player/player.png");
-                playerWalkRight[i] = loadImage("/player/player.png");
-=======
             playerIdleDown = loadImage("/it/unibo/exam/view/texture/player/player_front_1.png");
             playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player_back_1.png");
             playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_left_1.png");
@@ -68,7 +55,6 @@ public class AssetLoader {
                 playerWalkUp[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_back_" + i + ".png");
                 playerWalkLeft[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_left_" + i + ".png");
                 playerWalkRight[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_" + i + ".png");
->>>>>>> Davide
             }
             
             assetsLoaded = true;
