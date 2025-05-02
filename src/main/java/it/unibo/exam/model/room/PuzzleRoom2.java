@@ -31,7 +31,7 @@ public class PuzzleRoom2 extends Room implements PuzzleRoom {
                 // Update the door in the main room
                 gameState.updateDoorState(2, true); // 1 is the index of this puzzle room
                 // Change room color
-                setBackgroundColor(Color.PINK);
+                setBackgroundColor(Color.RED);
             }
         }
     }

@@ -1,8 +1,4 @@
-.build/
-bin/
 .gradle/
+bin/
 build/
-.vscode/
-.metals/
 *.class
-.gradle/8.11.1/fileHashes/fileHashes.lock

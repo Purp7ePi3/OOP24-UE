@@ -1,13 +1,12 @@
 package it.unibo.exam.model.game;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import it.unibo.exam.model.entity.Door;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.room.Room;
-import it.unibo.exam.model.room.*;
 import it.unibo.exam.view.panel.GamePanel;
 
 public class GameState {
@@ -15,38 +14,24 @@ public class GameState {
     private int currentRoomIndex;
     private Player player;
     private String lastInteraction = "";
+    private RoomsFactory roomsFactory = new RoomsFactory();
     
     public GameState() {
         rooms = new ArrayList<>();
         currentRoomIndex = 0;
-        
-        player = new Player(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2,
-                          GamePanel.ORIGINAL_HEIGHT / 2 - GamePanel.TILE_SIZE / 2,
-                          20);
-        
+
+        int playerX = GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2;
+        int playerY = GamePanel.ORIGINAL_HEIGHT / 2 - GamePanel.TILE_SIZE / 2;
+        player = new Player(playerX, playerY, 20);
+
         createRooms();
     }
-    
+
     private void createRooms() {
-        List<Door> room1Doors = List.of(
-            new Door(0, GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Palestra", 1, false),
-            new Door(0, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Bar", 2, false),
-            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Laboratorio", 3, false),
-            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, 3 * GamePanel.ORIGINAL_HEIGHT / 4 - GamePanel.TILE_SIZE / 2, "Aula 2.12", 4, false),
-            new Door(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Giarino", 5, false));
-        rooms.add(new Room(Color.GRAY, room1Doors));
-        
-        rooms.add(new PuzzleRoom1(List.of(
-            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
-        rooms.add(new PuzzleRoom2(List.of(
-            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
-        rooms.add(new PuzzleRoom3(List.of(
-            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
-        rooms.add(new PuzzleRoom4(List.of(
-            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
-        rooms.add(new PuzzleRoom4(List.of(
-            new Door(GamePanel.ORIGINAL_WIDTH - GamePanel.TILE_SIZE, GamePanel.ORIGINAL_HEIGHT - GamePanel.TILE_SIZE, "Back to Main", 0, false)), this));
-        }
+        rooms = IntStream.rangeClosed(0, 4)
+                .mapToObj(i -> roomsFactory.createRoom(i, this))
+                .toList();
+    }
 
     public Room getCurrentRoom() {
         return rooms.get(currentRoomIndex);

@@ -3,6 +3,10 @@ package it.unibo.exam.view.renderer;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import it.unibo.exam.Utility.Dimension;
+import it.unibo.exam.Utility.Position;
+import it.unibo.exam.model.entity.NPC;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.view.texture.AssetLoader;
 
@@ -10,6 +14,8 @@ public class EntityRenderer {
     public void renderPlayer(Graphics2D g2, Player player) {
         BufferedImage image = null;
         AssetLoader assetLoader = AssetLoader.getInstance();
+        Position playerPos = player.getPosition();
+        Dimension playerSize = player.getSize();
         
         if (player.isMoving()) {
             switch (player.getDirection()) {
@@ -28,7 +34,7 @@ public class EntityRenderer {
         }
         
         if (image != null) {
-            g2.drawImage(image, player.getX(), player.getY(), player.getWidth(), player.getHeight(), null);
+            g2.drawImage(image, playerPos.x(), playerPos.y(), playerSize.W(), playerSize.H(), null);
         } else {
             switch (player.getDirection()) {
                 case Player.UP: g2.setColor(Color.CYAN); break;
@@ -37,20 +43,35 @@ public class EntityRenderer {
                 case Player.RIGHT: g2.setColor(Color.YELLOW); break;
                 default: g2.setColor(Color.MAGENTA);
             }
-            
-            g2.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+            g2.fillRect(playerPos.x(), playerPos.y(), playerSize.W(), playerSize.H());
+
             
             g2.setColor(Color.BLACK);
-            int centerX = player.getX() + player.getWidth() / 2;
-            int centerY = player.getY() + player.getHeight() / 2;
-            int indicatorSize = player.getWidth() / 4;
+            Position center = new Position(playerPos.x() + playerSize.W() / 2, playerPos.y() + playerSize.H() / 2);
+       
+            int indicatorSize = playerSize.W() / 4;
             
             switch (player.getDirection()) {
-                case Player.UP: g2.fillRect(centerX - indicatorSize / 2, player.getY() + indicatorSize, indicatorSize, indicatorSize); break;
-                case Player.DOWN: g2.fillRect(centerX - indicatorSize / 2, player.getY() + player.getHeight() - indicatorSize * 2, indicatorSize, indicatorSize); break;
-                case Player.LEFT: g2.fillRect(player.getX() + indicatorSize, centerY - indicatorSize / 2, indicatorSize, indicatorSize); break;
-                case Player.RIGHT: g2.fillRect(player.getX() + player.getWidth() - indicatorSize * 2, centerY - indicatorSize / 2, indicatorSize, indicatorSize); break;
+                case Player.UP: 
+                    g2.fillRect(center.x() - indicatorSize / 2, playerPos.y() + indicatorSize, indicatorSize, indicatorSize); 
+                    break;
+                case Player.DOWN: 
+                    g2.fillRect(center.x() - indicatorSize / 2, playerPos.y() + playerSize.H() - indicatorSize * 2, indicatorSize, indicatorSize); 
+                    break;
+                case Player.LEFT: 
+                    g2.fillRect(playerPos.x() + indicatorSize, center.y() - indicatorSize / 2, indicatorSize, indicatorSize); 
+                    break;
+                default: // Player.RIGHT
+                    g2.fillRect(playerPos.x() + playerSize.W() - indicatorSize * 2, center.y() - indicatorSize / 2, indicatorSize, indicatorSize); 
             }
         }
     }
+
+    public void renderNPC(Graphics2D g2, NPC npc) {
+        Position npcPos = npc.getPosition();
+        Dimension npcSize = npc.getSize();
+        g2.setColor(Color.ORANGE);
+        g2.fillRect(npcPos.x(), npcPos.y(), npcSize.W(), npcSize.H());
+    }
+    
 }

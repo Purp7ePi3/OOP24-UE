@@ -95,6 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
         
         entityRenderer.renderPlayer(g2, player);
+        entityRenderer.renderNPC(g2, currentRoom.getNPC());
         drawUI(g2, gameState);
         
         g2.dispose();
