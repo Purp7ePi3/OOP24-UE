@@ -19,7 +19,8 @@ public class AssetLoader {
     private BufferedImage[] playerWalkDown;
     private BufferedImage[] playerWalkLeft;
     private BufferedImage[] playerWalkRight;
-    
+
+
     // Track if assets were successfully loaded
     private boolean assetsLoaded = false;
     
@@ -37,12 +38,13 @@ public class AssetLoader {
     private void loadAssets() {
         try {
             // Initialize arrays first to prevent NullPointerExceptions
-            playerWalkDown = new BufferedImage[4];
-            playerWalkUp = new BufferedImage[4];
-            playerWalkLeft = new BufferedImage[4];
-            playerWalkRight = new BufferedImage[4];
+            playerWalkDown = new BufferedImage[3];
+            playerWalkUp = new BufferedImage[3];
+            playerWalkLeft = new BufferedImage[3];
+            playerWalkRight = new BufferedImage[3];
             
             // Load player idle textures
+<<<<<<< HEAD
             playerIdleDown = loadImage("/player/player.png");
             playerIdleUp = loadImage("/player/player.png");
             playerIdleLeft = loadImage("/player/player.png");
@@ -54,6 +56,19 @@ public class AssetLoader {
                 playerWalkUp[i] = loadImage("/player/player.png");
                 playerWalkLeft[i] = loadImage("/player/player.png");
                 playerWalkRight[i] = loadImage("/player/player.png");
+=======
+            playerIdleDown = loadImage("/it/unibo/exam/view/texture/player/player_front_1.png");
+            playerIdleUp = loadImage("/it/unibo/exam/view/texture/player/player_back_1.png");
+            playerIdleLeft = loadImage("/it/unibo/exam/view/texture/player/player_left_1.png");
+            playerIdleRight = loadImage("/it/unibo/exam/view/texture/player/player_right_1.png");
+
+            
+            for (int i = 0; i < 3; i++) {
+                playerWalkDown[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_front_" + i + ".png");
+                playerWalkUp[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_back_" + i + ".png");
+                playerWalkLeft[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_left_" + i + ".png");
+                playerWalkRight[i] = loadImage("/it/unibo/exam/view/texture/player/player_walk_right_" + i + ".png");
+>>>>>>> Davide
             }
             
             assetsLoaded = true;
@@ -93,7 +108,7 @@ public class AssetLoader {
     public boolean areAssetsLoaded() {
         return assetsLoaded;
     }
-    
+
     // Getters for player textures
     public BufferedImage getPlayerIdleUp() {
         return playerIdleUp;

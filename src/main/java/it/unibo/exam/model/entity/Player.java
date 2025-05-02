@@ -2,6 +2,7 @@ package it.unibo.exam.model.entity;
 
 import java.awt.Rectangle;
 import it.unibo.exam.view.panel.GamePanel;
+import it.unibo.exam.view.texture.AssetLoader;
 
 public class Player extends Entity {
     private int speed;
@@ -14,6 +15,7 @@ public class Player extends Entity {
     
     private int direction = DOWN; // Default direction
     private boolean moving = false;
+    private boolean movingEnabler = true;
     
     // Animation variables
     private int spriteCounter = 0;
@@ -22,17 +24,20 @@ public class Player extends Entity {
     public Player(int x, int y, int speed) {
         this.x = x;
         this.y = y;
-        this.width = GamePanel.TILE_SIZE;
-        this.height = GamePanel.TILE_SIZE;
+        this.width = 80;
+        this.height = 80;
         this.speed = speed;
         this.hitbox = new Rectangle(x, y, width, height);
+        
+        
     }
     
     public void move(boolean up, boolean down, boolean left, boolean right, double deltaTime) {
         int currentSpeedX = 0;
         int currentSpeedY = 0;
-        
-        // Reset moving flag
+
+        if(movingEnabler==true){
+            // Reset moving flag
         moving = false;
         
         // Update direction based on key input
@@ -70,13 +75,21 @@ public class Player extends Entity {
         updateHitbox();
         
         // Update animation
-        if (moving) {
-            spriteCounter += deltaTime * 10;
-            if (spriteCounter > 1) {
-                spriteNum = (spriteNum + 1) % 4; // Cycle through 4 frames
+        if(moving){
+            spriteCounter++;
+            if (spriteCounter >= 15) {
+                
+                if(spriteNum == 0){
+                    spriteNum = 1;
+                }
+                else if(spriteNum == 1){
+                    spriteNum = 0;
+                }
+
                 spriteCounter = 0;
             }
         }
+        } 
     }
     
     public int getSpeed() {
@@ -109,5 +122,9 @@ public class Player extends Entity {
     public void setY(int y) {
         this.y = y;
         updateHitbox();
+    }
+
+    public void setMovingEnabler(boolean movingEnabler) {
+        this.movingEnabler = movingEnabler;
     }
 }
