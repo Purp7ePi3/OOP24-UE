@@ -1,6 +1,11 @@
 package it.unibo.exam.model.entity;
 
 import java.awt.Rectangle;
+
+
+import it.unibo.exam.Utility.Dimension;
+import it.unibo.exam.Utility.Direction;
+import it.unibo.exam.Utility.Position;
 import it.unibo.exam.view.panel.GamePanel;
 
 public class Player extends Entity {
@@ -20,22 +25,19 @@ public class Player extends Entity {
     private int spriteNum = 0;
     
     public Player(int x, int y, int speed) {
-        this.x = x;
-        this.y = y;
-        this.width = GamePanel.TILE_SIZE;
-        this.height = GamePanel.TILE_SIZE;
+        super("Player", new Position(x, y) , new Dimension(GamePanel.TILE_SIZE, GamePanel.TILE_SIZE));
         this.speed = speed;
-        this.hitbox = new Rectangle(x, y, width, height);
+        this.hitbox = new Rectangle(x, y, size.W(), size.H());
     }
     
     public void move(boolean up, boolean down, boolean left, boolean right, double deltaTime) {
         int currentSpeedX = 0;
         int currentSpeedY = 0;
-        
+
         // Reset moving flag
         moving = false;
-        
-        // Update direction based on key input
+
+        // Update direction and speed based on key input
         if (up) {
             currentSpeedY = -speed;
             direction = UP;
@@ -56,19 +58,32 @@ public class Player extends Entity {
             direction = RIGHT;
             moving = true;
         }
-        
-        // Update position
-        x += currentSpeedX * deltaTime * speed;
-        y += currentSpeedY * deltaTime * speed;
-        
+
+        int dx = ( int) (currentSpeedX * deltaTime * speed);
+        int dy = ( int) (currentSpeedY * deltaTime * speed);
+
+        updatePos(pos.move(new Direction(dx, dy)));
+
+        // Log updated position for debugging
+        System.out.println("Updated Player position: x=" + pos.x() + ", y=" + pos.y());
+
         // Boundary checks
-        if (x < 0) x = 0;
-        if (x > GamePanel.ORIGINAL_WIDTH - width) x = GamePanel.ORIGINAL_WIDTH - width;
-        if (y < 0) y = 0;
-        if (y > GamePanel.ORIGINAL_HEIGHT - height) y = GamePanel.ORIGINAL_HEIGHT - height;
-        
+        if (pos.x() < 0) {
+            pos.setX(0);
+        }
+        if (pos.x() > GamePanel.ORIGINAL_WIDTH - size.W()) {
+            pos.setX(GamePanel.ORIGINAL_WIDTH - size.W());
+        }
+        if (pos.y() < 0) {
+            pos.setY(0);
+        }
+        if (pos.y() > GamePanel.ORIGINAL_HEIGHT - size.H()) {
+            pos.setY(GamePanel.ORIGINAL_HEIGHT - size.H());
+        }
+
+        // Update hitbox
         updateHitbox();
-        
+
         // Update animation
         if (moving) {
             spriteCounter += deltaTime * 10;
@@ -96,18 +111,18 @@ public class Player extends Entity {
     }
     
     private void updateHitbox() {
-        hitbox.x = x;
-        hitbox.y = y;
+        hitbox.x = pos.x();
+        hitbox.y = pos.y();
     }
     
     // Added setters needed by GameController
     public void setX(int x) {
-        this.x = x;
+        pos.setX(x);
         updateHitbox();
     }
     
     public void setY(int y) {
-        this.y = y;
+        pos.setY(y);
         updateHitbox();
     }
 }

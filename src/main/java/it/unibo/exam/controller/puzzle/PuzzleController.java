@@ -3,6 +3,7 @@ package it.unibo.exam.controller.puzzle;
 import it.unibo.exam.controller.input.KeyHandler;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
+import it.unibo.exam.model.game.RoomsFactory;
 import it.unibo.exam.model.room.PuzzleRoom;
 import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.MainMenuPanel;
@@ -11,10 +12,7 @@ import it.unibo.exam.view.panel.MainMenuPanel;
 public class PuzzleController {
     private final GameState gameState;
     private final KeyHandler keyHandler;
-    
-    private static final String[] ROOM_NAMES = {
-        "Palestra", "Bar", "Laboratorio", "Aula 2.12", "Giardino"
-    };
+
 
     public PuzzleController(GameState gameState, KeyHandler keyHandler) {
         this.gameState = gameState;
@@ -47,9 +45,7 @@ public class PuzzleController {
         // Update the game state based on which puzzle room was solved
         int roomIndex = gameState.getCurrentRoomIndex();
         gameState.updateDoorState(roomIndex, true);
-        String roomName = (roomIndex >= 0 && roomIndex < ROOM_NAMES.length + 1) 
-            ? ROOM_NAMES[roomIndex - 1] 
-            : "Unknown Room";
+        String roomName = RoomsFactory.names.get(roomIndex);
     
         gameState.setLastInteraction(roomName + " solved!");
     }

@@ -2,12 +2,19 @@ package it.unibo.exam.controller.game;
 
 import it.unibo.exam.controller.input.KeyHandler;
 import it.unibo.exam.model.entity.Door;
+import it.unibo.exam.model.entity.NPC;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.panel.GamePanel;
+import javax.swing.JOptionPane;
 
+/**
+ * GameController is responsible for managing the game state and player interactions.
+ * It updates the game state based on player input and handles room transitions.
+ */
 public class GameController {
+
     private GameState gameState;
     private KeyHandler keyHandler;
     private int fps;
@@ -36,8 +43,16 @@ public class GameController {
         
         // Check door interactions
         Room currentRoom = gameState.getCurrentRoom();
+        NPC npc = currentRoom.getNPC();
+
+        if (npc != null && npc.isNearby(player) && keyHandler.interactPressed) {
+            // Show dialog with NPC
+            gameState.setLastInteraction("Interacted with: " + npc.getName());
+            npc.interact();
+        }
+
         for (Door door : currentRoom.getDoors()) {
-            if (door.isPlayerNearby(player.getX(), player.getY()) && keyHandler.interactPressed) {
+            if (door.isNearby(player) && keyHandler.interactPressed) {
                 gameState.setLastInteraction("Interacted with: " + door.getName());
                 gameState.setCurrentRoomIndex(door.getTargetRoomIndex());
                 player.setX(GamePanel.ORIGINAL_WIDTH / 2 - GamePanel.TILE_SIZE / 2);
