@@ -9,6 +9,7 @@ import it.unibo.exam.controller.input.KeyHandler;
 import it.unibo.exam.model.entity.BallEntity;
 import it.unibo.exam.model.entity.BottleEntity;
 import it.unibo.exam.model.entity.Door;
+import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.view.panel.GamePanel;
 
@@ -39,6 +40,7 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
             
             if (playerX == 0 && playerY == 0 && keyHandler.interactPressed && puzzleSolved == false) {
                 miniGameActive = true;
+                gameState.getPlayer().setMovingEnabler(false);
                 score = 0;
                 balls.clear();
                 bottle = new BottleEntity(
@@ -68,6 +70,7 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
                         if (score >= targetScore) {
                             puzzleSolved = true;
                             miniGameActive = false;
+                            gameState.getPlayer().setMovingEnabler(true);
                             if (!getDoors().isEmpty()) {
                                 Door firstDoor = getDoors().get(0);
                                 firstDoor.setSolved(true);
@@ -84,7 +87,10 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
                 ballSpawnTimer++;
                 if (ballSpawnTimer > 60) {
                     ballSpawnTimer = 0;
-                    int x = (int)(Math.random() * (GamePanel.ORIGINAL_WIDTH - 10));
+                    int x = (int)(Math.random() * ((GamePanel.ORIGINAL_WIDTH - 200)- 200 + 1))+ 200; //min=200, max=width-200=800
+                    if(x == 0){
+                        balls.add(new BallEntity(x, 80));
+                    }
                     balls.add(new BallEntity(x, 30));
                 }
 

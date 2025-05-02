@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class BallEntity extends Entity {
-    private final int speed = 3;
+    private final int speed = 4;
 
     public BallEntity(int startX, int radius) {
         this.x = startX;
@@ -24,7 +24,7 @@ public class BallEntity extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.ORANGE);
+        g2.setColor(Color.MAGENTA);
         g2.fillOval(x, y, width, height);
     }
 }

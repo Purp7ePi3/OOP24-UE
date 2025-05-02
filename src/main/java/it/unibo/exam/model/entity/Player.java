@@ -15,6 +15,7 @@ public class Player extends Entity {
     
     private int direction = DOWN; // Default direction
     private boolean moving = false;
+    private boolean movingEnabler = true;
     
     // Animation variables
     private int spriteCounter = 0;
@@ -34,8 +35,9 @@ public class Player extends Entity {
     public void move(boolean up, boolean down, boolean left, boolean right, double deltaTime) {
         int currentSpeedX = 0;
         int currentSpeedY = 0;
-        
-        // Reset moving flag
+
+        if(movingEnabler==true){
+            // Reset moving flag
         moving = false;
         
         // Update direction based on key input
@@ -87,17 +89,7 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
-           
-        
-
-        
-        /*if (moving) {
-            spriteCounter += deltaTime * 10;
-            if (spriteCounter > 1) {
-                spriteNum = (spriteNum + 1) % 2; // Cycle through 2 frames
-                spriteCounter = 0;
-            }
-        }*/
+        } 
     }
     
     public int getSpeed() {
@@ -130,5 +122,9 @@ public class Player extends Entity {
     public void setY(int y) {
         this.y = y;
         updateHitbox();
+    }
+
+    public void setMovingEnabler(boolean movingEnabler) {
+        this.movingEnabler = movingEnabler;
     }
 }
