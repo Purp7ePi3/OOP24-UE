@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.JPanel;
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
+import it.unibo.exam.model.entity.NPC;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.model.room.PuzzleRoom;
@@ -79,27 +80,35 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
     
-    @Override
-    protected void paintComponent(final Graphics g) {
-        super.paintComponent(g);
-        final Graphics2D g2 = (Graphics2D) g;
-        
-        GameState gameState = gameController.getGameState();
-        Room currentRoom = gameState.getCurrentRoom();
-        Player player = gameState.getPlayer();
-        
-        if (currentRoom instanceof PuzzleRoom) {
-            ((PuzzleRoom) currentRoom).draw(g2);
-        } else {
-            roomRenderer.render(g2, currentRoom);
-        }
-        
-        entityRenderer.renderPlayer(g2, player);
-        entityRenderer.renderNPC(g2, currentRoom.getNPC());
-        drawUI(g2, gameState);
-        
-        g2.dispose();
+@Override
+protected void paintComponent(final Graphics g) {
+    super.paintComponent(g);
+    final Graphics2D g2 = (Graphics2D) g;
+
+    GameState gameState = gameController.getGameState();
+    Room currentRoom   = gameState.getCurrentRoom();
+    Player player      = gameState.getPlayer();
+
+    // draw room / puzzle background
+    if (currentRoom instanceof PuzzleRoom) {
+        ((PuzzleRoom) currentRoom).draw(g2);
+    } else {
+        roomRenderer.render(g2, currentRoom);
     }
+
+    // draw the player
+    entityRenderer.renderPlayer(g2, player);
+
+    // only draw an NPC if one is set
+    NPC npc = currentRoom.getNPC();
+    if (npc != null) {
+        entityRenderer.renderNPC(g2, npc);
+    }
+
+    drawUI(g2, gameState);
+    g2.dispose();
+}
+
     
     private void drawUI(Graphics2D g2, GameState gameState) {
         g2.setColor(Color.WHITE);
