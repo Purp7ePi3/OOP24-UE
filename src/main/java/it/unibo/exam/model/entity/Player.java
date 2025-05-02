@@ -9,6 +9,7 @@ import it.unibo.exam.Utility.Position;
 import it.unibo.exam.view.panel.GamePanel;
 import it.unibo.exam.view.texture.AssetLoader;
 
+@SuppressWarnings("unused")
 public class Player extends Entity {
     private int speed;
     
@@ -140,4 +141,13 @@ public class Player extends Entity {
     public void setMovingEnabler(boolean movingEnabler) {
         this.movingEnabler = movingEnabler;
     }
+
+    public int getX() {
+        return pos.x();
+    }
+    
+    public int getY() {
+        return pos.y();
+    }
+    
 }

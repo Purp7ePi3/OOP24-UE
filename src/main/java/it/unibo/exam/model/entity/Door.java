@@ -35,4 +35,21 @@ public class Door extends Entity {
     public void setSolved(boolean solved) {
         this.isSolved = solved;
     }
+
+    public int getX() {
+        return pos.x();
+    }
+    
+    public int getY() {
+        return pos.y();
+    }
+    
+    public int getWidth() {
+        return size.W();
+    }
+    
+    public int getHeight() {
+        return size.H();
+    }
+    
 }

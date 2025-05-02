@@ -5,6 +5,7 @@ import it.unibo.exam.Utility.Position;
 import it.unibo.exam.view.panel.GamePanel;
 import javax.swing.JOptionPane;
 
+@SuppressWarnings("unused")
 public class NPC extends Entity {
     private String name;
     private String dialog;

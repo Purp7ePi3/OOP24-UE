@@ -15,6 +15,7 @@ import it.unibo.exam.view.texture.AssetLoader;
  * GameController is responsible for managing the game state and player interactions.
  * It updates the game state based on player input and handles room transitions.
  */
+@SuppressWarnings("unused")
 public class GameController {
 
     private GameState gameState;
