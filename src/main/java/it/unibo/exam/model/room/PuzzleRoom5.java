@@ -24,6 +24,7 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
     private int score = 0;
     private int targetScore = 5;
     private int ballSpawnTimer = 0;
+    private int loseball = 0;
 
     public PuzzleRoom5(final List<Door> doors, final GameState gameState) {
         super(Color.GRAY, doors);
@@ -79,6 +80,12 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
                             }
                         }
                     } else if (ball.isOffScreen(GamePanel.ORIGINAL_HEIGHT)) {
+                        if(loseball == 2){
+                            puzzleSolved = false;
+                            miniGameActive = false;
+                            gameState.getPlayer().setMovingEnabler(true);
+                        }
+                        loseball++;
                         it.remove();
                     }
                 }
@@ -119,7 +126,7 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
 
             g2.setColor(Color.WHITE);
             g2.setFont(g2.getFont().deriveFont(18f));
-            g2.drawString("Score: " + score, 10, 20);
+            g2.drawString("Score: " + score, GamePanel.ORIGINAL_WIDTH / 2, 20);
         }
 
         if (puzzleSolved) {
