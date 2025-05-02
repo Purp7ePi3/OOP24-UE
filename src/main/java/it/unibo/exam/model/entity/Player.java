@@ -34,77 +34,40 @@ public class Player extends Entity {
     }
     
     public void move(boolean up, boolean down, boolean left, boolean right, double deltaTime) {
-        int currentSpeedX = 0;
-        int currentSpeedY = 0;
-
-        if(movingEnabler==true){
-            // Reset moving flag
-        moving = false;
-
-        // Update direction and speed based on key input
-        if (up) {
-            currentSpeedY = -speed;
-            direction = UP;
-            moving = true;
-        }
-        if (down) {
-            currentSpeedY = speed;
-            direction = DOWN;
-            moving = true;
-        }
-        if (left) {
-            currentSpeedX = -speed;
-            direction = LEFT;
-            moving = true;
-        }
-        if (right) {
-            currentSpeedX = speed;
-            direction = RIGHT;
-            moving = true;
-        }
-
-        int dx = ( int) (currentSpeedX * deltaTime * speed);
-        int dy = ( int) (currentSpeedY * deltaTime * speed);
-
-        updatePos(pos.move(new Direction(dx, dy)));
-
-        // Log updated position for debugging
-        System.out.println("Updated Player position: x=" + pos.x() + ", y=" + pos.y());
-
-        // Boundary checks
-        if (pos.x() < 0) {
-            pos.setX(0);
-        }
-        if (pos.x() > GamePanel.ORIGINAL_WIDTH - size.W()) {
-            pos.setX(GamePanel.ORIGINAL_WIDTH - size.W());
-        }
-        if (pos.y() < 0) {
-            pos.setY(0);
-        }
-        if (pos.y() > GamePanel.ORIGINAL_HEIGHT - size.H()) {
-            pos.setY(GamePanel.ORIGINAL_HEIGHT - size.H());
-        }
-
-        // Update hitbox
+        // 1) Determine raw velocities
+        int vx = 0, vy = 0;
+        if (up)    { vy = -speed; direction = UP; moving = true; }
+        if (down)  { vy =  speed; direction = DOWN; moving = true; }
+        if (left)  { vx = -speed; direction = LEFT; moving = true; }
+        if (right) { vx =  speed; direction = RIGHT; moving = true; }
+    
+        // 2) Compute frame‐scaled deltas
+        int dx = (int)(vx * deltaTime * speed);
+        int dy = (int)(vy * deltaTime * speed);
+    
+        // 3) Move X and clamp
+        int newX = pos.x() + dx;
+        newX = Math.max(0, Math.min(newX, GamePanel.ORIGINAL_WIDTH - size.W()));
+        pos.setX(newX);
+    
+        // 4) Move Y and clamp
+        int newY = pos.y() + dy;
+        newY = Math.max(0, Math.min(newY, GamePanel.ORIGINAL_HEIGHT - size.H()));
+        pos.setY(newY);
+    
+        // 5) Update hitbox
         updateHitbox();
-
-        // Update animation
-        if(moving){
+    
+        // 6) Animate sprite if moving
+        if (moving) {
             spriteCounter++;
             if (spriteCounter >= 15) {
-                
-                if(spriteNum == 0){
-                    spriteNum = 1;
-                }
-                else if(spriteNum == 1){
-                    spriteNum = 0;
-                }
-
+                spriteNum = (spriteNum == 0 ? 1 : 0);
                 spriteCounter = 0;
             }
         }
-        } 
     }
+    
     
     public int getSpeed() {
         return speed;
