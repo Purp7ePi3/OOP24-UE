@@ -37,14 +37,14 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
         if (!getDoors().isEmpty()) {
             //Door firstDoor = getDoors().get(0);
             
-            if (playerX == 0 && playerY == 0 && keyHandler.interactPressed) {
+            if (playerX == 0 && playerY == 0 && keyHandler.interactPressed && puzzleSolved == false) {
                 miniGameActive = true;
                 score = 0;
                 balls.clear();
                 bottle = new BottleEntity(
                 GamePanel.ORIGINAL_WIDTH / 2 - 20,
                 GamePanel.ORIGINAL_HEIGHT - 30,
-                40,
+                100,
                 20);
             }
             if (miniGameActive) {
@@ -85,7 +85,7 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
                 if (ballSpawnTimer > 60) {
                     ballSpawnTimer = 0;
                     int x = (int)(Math.random() * (GamePanel.ORIGINAL_WIDTH - 10));
-                    balls.add(new BallEntity(x, 10));
+                    balls.add(new BallEntity(x, 30));
                 }
 
             }

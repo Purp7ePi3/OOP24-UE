@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class BottleEntity extends Entity {
-    private final int speed = 5;
+    private final int speed = 7;
 
     public BottleEntity(int startX, int startY, int width, int height) {
         this.x = startX;
