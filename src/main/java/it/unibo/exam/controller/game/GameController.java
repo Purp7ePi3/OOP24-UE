@@ -1,5 +1,6 @@
 package it.unibo.exam.controller.game;
 
+
 import it.unibo.exam.controller.input.KeyHandler;
 import it.unibo.exam.model.entity.Door;
 import it.unibo.exam.model.entity.Player;
@@ -33,9 +34,16 @@ public class GameController {
         Player player = gameState.getPlayer();
         player.move(keyHandler.upPressed, keyHandler.downPressed, 
                    keyHandler.leftPressed, keyHandler.rightPressed, deltaTime);
+<<<<<<< Updated upstream
         
         // Check door interactions
         Room currentRoom = gameState.getCurrentRoom();
+=======
+
+        // Check door interactions
+        Room currentRoom = gameState.getCurrentRoom();
+
+>>>>>>> Stashed changes
         for (Door door : currentRoom.getDoors()) {
             if (door.isPlayerNearby(player.getX(), player.getY()) && keyHandler.interactPressed) {
                 gameState.setLastInteraction("Interacted with: " + door.getName());

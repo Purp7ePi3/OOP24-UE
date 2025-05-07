@@ -1,13 +1,19 @@
 package it.unibo.exam.view.panel;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
+
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
+import it.unibo.exam.model.entity.Minigame;
 import it.unibo.exam.model.entity.Player;
 import it.unibo.exam.model.game.GameState;
-import it.unibo.exam.model.room.PuzzleRoom;
 import it.unibo.exam.model.room.Room;
 import it.unibo.exam.view.renderer.EntityRenderer;
 import it.unibo.exam.view.renderer.RoomRenderer;
@@ -83,20 +89,37 @@ public class GamePanel extends JPanel implements Runnable {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         final Graphics2D g2 = (Graphics2D) g;
-        
+
         GameState gameState = gameController.getGameState();
         Room currentRoom = gameState.getCurrentRoom();
         Player player = gameState.getPlayer();
-        
-        if (currentRoom instanceof PuzzleRoom) {
-            ((PuzzleRoom) currentRoom).draw(g2);
-        } else {
+
+        if (currentRoom != null) {
             roomRenderer.render(g2, currentRoom);
+
+            if (currentRoom.isMinigameActive()) {
+                Minigame minigame = currentRoom.getMinigame();
+                if (minigame != null) {
+                    puzzleController.renderMinigame(g2, minigame);
+                }
+            } else {
+                // Render entities
+                entityRenderer.renderPlayer(g2, player);
+                if (currentRoom.getNPC() != null) {
+                    entityRenderer.renderNPC(g2, currentRoom.getNPC());
+                }
+                // Render UI
+                drawUI(g2, gameState);
+            }
         }
+<<<<<<< Updated upstream
         
         entityRenderer.renderPlayer(g2, player);
         drawUI(g2, gameState);
         
+=======
+
+>>>>>>> Stashed changes
         g2.dispose();
     }
     

@@ -1,6 +1,15 @@
 package it.unibo.exam.model.entity;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+<<<<<<< Updated upstream
+=======
+
+import it.unibo.exam.Utility.Dimension;
+import it.unibo.exam.Utility.Direction;
+import it.unibo.exam.Utility.Position;
+>>>>>>> Stashed changes
 import it.unibo.exam.view.panel.GamePanel;
 
 public class Player extends Entity {
@@ -56,11 +65,23 @@ public class Player extends Entity {
             direction = RIGHT;
             moving = true;
         }
+<<<<<<< Updated upstream
         
         // Update position
         x += currentSpeedX * deltaTime * speed;
         y += currentSpeedY * deltaTime * speed;
         
+=======
+
+        int dx = ( int) (currentSpeedX * deltaTime * speed);
+        int dy = ( int) (currentSpeedY * deltaTime * speed);
+
+        updatePos(pos.move(new Direction(dx, dy)));
+
+        // Log updated position for debugging
+        //System.out.println("Updated Player position: x=" + pos.x() + ", y=" + pos.y());
+
+>>>>>>> Stashed changes
         // Boundary checks
         if (x < 0) x = 0;
         if (x > GamePanel.ORIGINAL_WIDTH - width) x = GamePanel.ORIGINAL_WIDTH - width;
@@ -99,6 +120,19 @@ public class Player extends Entity {
         hitbox.x = x;
         hitbox.y = y;
     }
+
+    public void updatePos(Position newPos) {
+        this.pos = newPos;
+        updateHitbox();
+    }
+
+    public Position getPos() {
+        return pos;
+    }
+
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
     
     // Added setters needed by GameController
     public void setX(int x) {
@@ -110,4 +144,21 @@ public class Player extends Entity {
         this.y = y;
         updateHitbox();
     }
+<<<<<<< Updated upstream
+=======
+
+    public void setMovingEnabler(boolean movingEnabler) {
+        this.movingEnabler = movingEnabler;
+    }
+
+    public void render(Graphics2D g2) {
+        // Draw shadow
+        g2.setColor(new Color(0, 0, 0, 100));
+        g2.fillOval(pos.x() + 5, pos.y() + size.H() - 10, size.W() - 10, 10);
+
+        // Draw player
+        g2.setColor(Color.BLUE);
+        g2.fillRect(pos.x(), pos.y(), size.W(), size.H());
+    }
+>>>>>>> Stashed changes
 }

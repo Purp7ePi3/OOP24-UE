@@ -10,7 +10,14 @@ public class EntityRenderer {
     public void renderPlayer(Graphics2D g2, Player player) {
         BufferedImage image = null;
         AssetLoader assetLoader = AssetLoader.getInstance();
+<<<<<<< Updated upstream
         
+=======
+        Position playerPos = player.getPosition();
+        Dimension playerSize = player.getSize();
+
+        // Determine the correct sprite based on movement and direction
+>>>>>>> Stashed changes
         if (player.isMoving()) {
             switch (player.getDirection()) {
                 case Player.UP: image = assetLoader.getPlayerWalkUp()[player.getSpriteNum()]; break;
@@ -26,10 +33,12 @@ public class EntityRenderer {
                 case Player.RIGHT: image = assetLoader.getPlayerIdleRight(); break;
             }
         }
-        
+
+        // Render the sprite or fallback to default rendering
         if (image != null) {
             g2.drawImage(image, player.getX(), player.getY(), player.getWidth(), player.getHeight(), null);
         } else {
+<<<<<<< Updated upstream
             switch (player.getDirection()) {
                 case Player.UP: g2.setColor(Color.CYAN); break;
                 case Player.DOWN: g2.setColor(Color.BLUE); break;
@@ -51,6 +60,38 @@ public class EntityRenderer {
                 case Player.LEFT: g2.fillRect(player.getX() + indicatorSize, centerY - indicatorSize / 2, indicatorSize, indicatorSize); break;
                 case Player.RIGHT: g2.fillRect(player.getX() + player.getWidth() - indicatorSize * 2, centerY - indicatorSize / 2, indicatorSize, indicatorSize); break;
             }
+=======
+            renderFallbackPlayer(g2, player);
+        }
+    }
+
+    private void renderFallbackPlayer(Graphics2D g2, Player player) {
+        Position playerPos = player.getPosition();
+        Dimension playerSize = player.getSize();
+
+        // Draw a simple rectangle as a fallback
+        g2.setColor(Color.BLUE);
+        g2.fillRect(playerPos.x(), playerPos.y(), playerSize.W(), playerSize.H());
+
+        // Draw a direction indicator
+        g2.setColor(Color.BLACK);
+        Position center = new Position(playerPos.x() + playerSize.W() / 2, playerPos.y() + playerSize.H() / 2);
+        int indicatorSize = playerSize.W() / 4;
+
+        switch (player.getDirection()) {
+            case Player.UP:
+                g2.fillRect(center.x() - indicatorSize / 2, playerPos.y() + indicatorSize, indicatorSize, indicatorSize);
+                break;
+            case Player.DOWN:
+                g2.fillRect(center.x() - indicatorSize / 2, playerPos.y() + playerSize.H() - indicatorSize * 2, indicatorSize, indicatorSize);
+                break;
+            case Player.LEFT:
+                g2.fillRect(playerPos.x() + indicatorSize, center.y() - indicatorSize / 2, indicatorSize, indicatorSize);
+                break;
+            case Player.RIGHT:
+                g2.fillRect(playerPos.x() + playerSize.W() - indicatorSize * 2, center.y() - indicatorSize / 2, indicatorSize, indicatorSize);
+                break;
+>>>>>>> Stashed changes
         }
     }
 }
