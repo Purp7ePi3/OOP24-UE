@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import it.unibo.exam.controller.game.GameController;
 import it.unibo.exam.controller.input.KeyHandler;
-import it.unibo.exam.controller.puzzle.PuzzleController; // Add this import
+import it.unibo.exam.controller.puzzle.PuzzleController;
 import it.unibo.exam.model.game.GameState;
 import it.unibo.exam.view.panel.MainMenuPanel;
 
