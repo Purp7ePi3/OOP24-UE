@@ -80,13 +80,14 @@ public class PuzzleRoom5 extends Room implements PuzzleRoom {
                             }
                         }
                     } else if (ball.isOffScreen(GamePanel.ORIGINAL_HEIGHT)) {
+                        loseball++;
+                        it.remove();
                         if(loseball == 2){
+                            loseball=0;
                             puzzleSolved = false;
                             miniGameActive = false;
                             gameState.getPlayer().setMovingEnabler(true);
                         }
-                        loseball++;
-                        it.remove();
                     }
                 }
 

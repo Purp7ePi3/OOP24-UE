@@ -377,3 +377,17 @@ INFORMAZIONI: Unsupported notification method: $/setTrace
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.lang.Thread.run(Thread.java:833)
 [0m
+2025.05.07 09:32:21 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\davide.amantini\Desktop\OOP24-UE\.metals\lsp.trace.json or C:\Users\davide.amantini\AppData\Local\scalameta\metals\cache\lsp.trace.json[0m
+2025.05.07 09:32:23 INFO  logging to file C:\Users\davide.amantini\Desktop\OOP24-UE\.metals\metals.log[0m
+2025.05.07 09:32:23 INFO  Started: Metals version 0.11.10 in workspace 'C:\Users\davide.amantini\Desktop\OOP24-UE' for client Visual Studio Code 1.74.3.[0m
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J: Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J: Ignoring binding found at [jar:file:/C:/Users/davide.amantini/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/outr/scribe-slf4j_2.13/3.10.5/scribe-slf4j_2.13-3.10.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+2025.05.07 09:32:29 INFO  time: initialize in 6.21s[0m
+2025.05.07 09:32:31 WARN  Build server is not auto-connectable.[0m
+2025.05.07 09:32:31 WARN  no build target for: C:\Users\davide.amantini\Desktop\OOP24-UE\src\main\java\it\unibo\exam\Main.java[0m
+mag 07, 2025 9:32:31 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 1
